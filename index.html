@@ -131,6 +131,194 @@
   .frase:nth-child(even){ text-align:right; }
   .frase:nth-child(even) .marca{ margin-left:auto; }
 
+  /* -------- MÚSICA -------- */
+  .music-btn{
+    position:fixed;
+    bottom:24px;
+    right:24px;
+    width:54px;
+    height:54px;
+    border-radius:50%;
+    background:linear-gradient(145deg,var(--lavender-deep),var(--rose));
+    box-shadow:0 10px 24px -8px rgba(75,58,92,0.45);
+    border:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    z-index:10;
+    transition:transform 0.25s ease;
+  }
+  .music-btn:active{ transform:scale(0.92); }
+  .music-btn svg{ width:22px; height:22px; fill:#FFFBF9; }
+  .music-btn .icon-pause{ display:none; }
+  .music-btn.playing .icon-play{ display:none; }
+  .music-btn.playing .icon-pause{ display:block; }
+  .music-btn.playing svg{ animation:spin 6s linear infinite; }
+  @keyframes spin{ from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
+
+  /* -------- FIRMA -------- */
+  .firma{
+    text-align:center;
+    padding:2rem 8vw 5rem;
+  }
+  .firma p{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:1.3rem;
+    color:var(--plum-soft);
+  }
+  .firma .nombre{
+    margin-top:0.3rem;
+    font-size:1.1rem;
+    color:var(--rose);
+    font-weight:600;
+  }
+</style>
+</head>
+<body>
+
+  <audio id="bg-music" loop preload="auto" autoplay>
+    <source src="PON_AQUI_EL_LINK_DE_TU_CANCION.mp3" type="audio/mpeg">
+  </audio>
+
+  <button class="music-btn" id="music-toggle" aria-label="Pausar o reproducir música">
+    <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+    <svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+  </button>
+
+  <section class="hero">
+    <span class="eyebrow">para Yamilet</span>
+    <h1>Yamilet</h1>
+    <p class="sub">un pequeño rincón del internet, hecho solo para ti.</p>
+  </section>
+
+  <div class="foto-wrap">
+    <div class="foto">
+      <!-- cuando tengas el link de tu foto, ponlo en el src de abajo
+           y cambia display:none por display:block en el CSS de arriba (.foto img) -->
+      <img src="PON_AQUI_EL_LINK_DE_TU_FOTO.jpg" alt="Nosotros">
+      <svg viewBox="0 0 24 24" fill="#FFFBF9"><path d="M12 21s-6.7-4.35-9.33-8.6C.86 9.1 2.1 5.7 5.4 5.02c2-.4 3.9.55 5 2.15 1.1-1.6 3-2.55 5-2.15 3.3.68 4.54 4.08 2.73 7.38C18.7 16.65 12 21 12 21z"/></svg>
+    </div>
+  </div>
+
+  <section class="frases">
+
+    <div class="frase">
+      <span class="marca"></span>
+      <p>Dicen que el amor a primera vista no existe, pero contigo no necesité ni verte para saber que quería quedarme.</p>
+    </div>
+
+    <div class="frase">
+      <span class="marca"></span>
+      <p>Si contara las veces que pienso en ti en un día, se me acabarían los dedos, las manos, y probablemente también el día.</p>
+    </div>
+
+    <div class="frase">
+      <span class="marca"></span>
+      <p>Hay canciones que hablan de amor, poemas que lo intentan describir, pero ninguno se acerca a lo que siento cuando simplemente me escribes 'buenos días'.</p>
+    </div>
+
+    <div class="frase">
+      <span class="marca"></span>
+      <p>Podría tener el mejor día del mundo, pero si no te hablo, siento un gran vacío.</p>
+    </div>
+
+    <div class="frase">
+      <span class="marca"></span>
+      <p>No sé si fue el destino, la suerte, o simplemente el momento correcto, pero estoy seguro de que fuiste la mejor casualidad que me pudo pasar.</p>
+    </div>
+
+    <div class="frase">
+      <span class="marca"></span>
+      <p>No hace falta abrazarte para sentir que ya eres parte de mi día a día.</p>
+    </div>
+
+    <div class="frase">
+      <span class="marca"></span>
+      <p>Cuento los días no porque el tiempo pese, sino porque sé que al final de la espera estás tú.</p>
+    </div>
+
+    <div class="frase">
+      <span class="marca"></span>
+      <p>Hay personas que conoces en persona y nunca las sientes tan cerca como te siento a ti, sin haberte visto aún.</p>
+    </div>
+
+    <div class="frase">
+      <span class="marca"></span>
+      <p>La distancia solo me está enseñando a valorar cada mensaje tuyo como si fuera un abrazo.</p>
+    </div>
+
+    <div class="frase">
+      <span class="marca"></span>
+      <p>El día que por fin te vea, todo esto que siento por chat va a saber poco comparado con tenerte enfrente.</p>
+    </div>
+
+  </section>
+
+  <div class="firma">
+    <p>con todo mi cariño,</p>
+    <p class="nombre">Fermin</p>
+  </div>
+
+  <script>
+    const musicBtn = document.getElementById('music-toggle');
+    const bgMusic = document.getElementById('bg-music');
+
+    function setPlayingUI(isPlaying){
+      musicBtn.classList.toggle('playing', isPlaying);
+    }
+
+    // Intenta reproducir sola al cargar
+    bgMusic.play().then(() => {
+      setPlayingUI(true);
+    }).catch(() => {
+      setPlayingUI(false);
+      // el navegador la bloqueó: se activa con el primer toque en cualquier parte
+      const startOnFirstTouch = () => {
+        bgMusic.play().then(() => setPlayingUI(true));
+        document.removeEventListener('touchstart', startOnFirstTouch);
+        document.removeEventListener('click', startOnFirstTouch);
+      };
+      document.addEventListener('touchstart', startOnFirstTouch, { once:true });
+      document.addEventListener('click', startOnFirstTouch, { once:true });
+    });
+
+    // el botón sigue sirviendo para pausar/reanudar manualmente
+    musicBtn.addEventListener('click', () => {
+      if (bgMusic.paused){
+        bgMusic.play();
+        setPlayingUI(true);
+      } else {
+        bgMusic.pause();
+        setPlayingUI(false);
+      }
+    });
+  </script>
+
+</body>
+</html>
+  .frase{
+    margin:0 0 3.2rem;
+    line-height:1.65;
+  }
+  .frase p{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:clamp(1.3rem,5vw,1.6rem);
+    margin:0;
+    color:var(--plum);
+  }
+  .frase .marca{
+    display:block;
+    width:34px;
+    height:2px;
+    background:var(--rose);
+    margin-bottom:0.9rem;
+  }
+  .frase:nth-child(even){ text-align:right; }
+  .frase:nth-child(even) .marca{ margin-left:auto; }
+
   /* -------- FIRMA -------- */
   .firma{
     text-align:center;
