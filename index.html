@@ -3,57 +3,144 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>para ti, niña linda</title>
+<title>buenos días, niña linda</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --night-deep: #1a1330;
-    --night-mid: #251b3f;
-    --gold: #e6b95c;
-    --rose: #d6899a;
-    --ivory: #f5efe4;
-    --lavender: #b3a3d4;
+    --cream: #fff7f9;
+    --peach: #ffe1ea;
+    --coral: #f491b3;
+    --gold: #f7c6d9;
+    --sky: #e7b8cf;
+    --plum: #5a3448;
+    --plum-soft: #9c7286;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   html { scroll-behavior: smooth; }
 
   body {
-    background: var(--night-deep);
-    color: var(--ivory);
+    background: var(--cream);
+    color: var(--plum);
     font-family: 'Work Sans', sans-serif;
     font-weight: 300;
     overflow-x: hidden;
-    position: relative;
   }
 
-  .stars {
+  .blobs {
     position: fixed;
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    background-image:
-      radial-gradient(1.5px 1.5px at 20% 30%, var(--ivory), transparent),
-      radial-gradient(1px 1px at 70% 15%, var(--gold), transparent),
-      radial-gradient(1.5px 1.5px at 85% 55%, var(--ivory), transparent),
-      radial-gradient(1px 1px at 40% 70%, var(--lavender), transparent),
-      radial-gradient(1.5px 1.5px at 10% 85%, var(--gold), transparent),
-      radial-gradient(1px 1px at 55% 45%, var(--ivory), transparent),
-      radial-gradient(1.5px 1.5px at 90% 90%, var(--lavender), transparent),
-      radial-gradient(1px 1px at 30% 10%, var(--ivory), transparent);
-    background-repeat: repeat;
-    background-size: 400px 400px;
-    opacity: 0.6;
+    overflow: hidden;
+  }
+
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.55;
+    animation: drift 22s ease-in-out infinite;
+  }
+
+  .blob.b1 {
+    width: 340px; height: 340px;
+    top: -80px; left: -100px;
+    background: radial-gradient(circle, #ffd2e2, transparent 70%);
+    animation-delay: 0s;
+  }
+
+  .blob.b2 {
+    width: 300px; height: 300px;
+    top: 30%; right: -120px;
+    background: radial-gradient(circle, #ffe8c9, transparent 70%);
+    animation-delay: -7s;
+  }
+
+  .blob.b3 {
+    width: 380px; height: 380px;
+    bottom: 5%; left: -140px;
+    background: radial-gradient(circle, #f6c9de, transparent 70%);
+    animation-delay: -14s;
+  }
+
+  .blob.b4 {
+    width: 260px; height: 260px;
+    bottom: 40%; right: -80px;
+    background: radial-gradient(circle, #ffeef4, transparent 70%);
+    animation-delay: -4s;
+  }
+
+  @keyframes drift {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(20px, -30px) scale(1.08); }
+    66% { transform: translate(-25px, 20px) scale(0.95); }
+  }
+
+  .floating-hearts {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .floating-hearts span {
+    position: absolute;
+    bottom: -10%;
+    font-size: 18px;
+    color: var(--coral);
+    opacity: 0.35;
+    animation: float-up linear infinite;
+  }
+
+  @keyframes float-up {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.35; }
+    90% { opacity: 0.2; }
+    100% { transform: translateY(-115vh) rotate(20deg); opacity: 0; }
   }
 
   main {
-    position: relative;
-    z-index: 1;
     max-width: 560px;
     margin: 0 auto;
-    padding: 0 28px 100px;
+    padding: 0 28px 110px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+
+  .reveal.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .divider {
+    display: flex;
+    justify-content: center;
+    color: var(--coral);
+    font-size: 14px;
+    opacity: 0.55;
+    padding-top: 10vh;
+    letter-spacing: 6px;
+  }
+
+  .sparkle {
+    position: absolute;
+    color: #fff;
+    opacity: 0.8;
+    animation: twinkle 2.4s ease-in-out infinite;
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.2; transform: scale(0.8); }
+    50% { opacity: 0.9; transform: scale(1.15); }
   }
 
   /* HERO */
@@ -63,43 +150,64 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    text-align: left;
+    position: relative;
+  }
+
+  .sun {
+    position: absolute;
+    right: -40px;
+    top: 8%;
+    width: 190px;
+    height: 190px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #fff0f5, var(--coral) 75%);
+    box-shadow: 0 0 90px 10px rgba(244, 145, 179, 0.35);
+    animation: rise 1.6s cubic-bezier(0.2, 0.9, 0.3, 1) both;
+  }
+
+  @keyframes rise {
+    from { transform: translateY(60px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
   }
 
   .hero .eyebrow {
-    font-family: 'Work Sans', sans-serif;
     font-size: 15px;
-    color: var(--lavender);
-    letter-spacing: 0.02em;
+    color: var(--coral);
     margin-bottom: 18px;
+    position: relative;
+    z-index: 1;
   }
 
   .hero h1 {
     font-family: 'Fraunces', serif;
     font-weight: 500;
-    font-size: clamp(38px, 9vw, 56px);
-    line-height: 1.12;
-    color: var(--ivory);
+    font-size: clamp(38px, 9vw, 58px);
+    line-height: 1.1;
+    color: var(--plum);
+    position: relative;
+    z-index: 1;
   }
 
   .hero h1 em {
     font-style: italic;
     font-weight: 400;
-    color: var(--rose);
+    color: var(--coral);
   }
 
   .hero p.sub {
     margin-top: 22px;
     font-size: 17px;
     line-height: 1.6;
-    color: var(--lavender);
-    max-width: 40ch;
+    color: var(--plum-soft);
+    max-width: 38ch;
+    position: relative;
+    z-index: 1;
   }
 
   .scroll-hint {
     margin-top: 56px;
     font-size: 14px;
-    color: var(--gold);
+    color: var(--coral);
     display: flex;
     align-items: center;
     gap: 8px;
@@ -115,145 +223,139 @@
     50% { transform: translateY(6px); }
   }
 
-  /* ENVELOPE */
-  section.letter-section {
-    padding-top: 18vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+  /* NOTE */
+  section.note {
+    padding-top: 12vh;
   }
 
-  .envelope-wrap {
-    width: 100%;
-    max-width: 320px;
-    cursor: pointer;
-    user-select: none;
+  .note-card {
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 22px;
+    padding: 38px 30px;
+    box-shadow: 0 30px 60px -30px rgba(244, 145, 179, 0.4);
   }
 
-  .envelope {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 3 / 2;
-    background: linear-gradient(155deg, #2f2350, var(--night-mid));
-    border: 1px solid rgba(230, 185, 92, 0.35);
-    border-radius: 4px;
-    box-shadow: 0 30px 60px -20px rgba(0,0,0,0.6);
-    transition: transform 0.4s ease;
-  }
-
-  .envelope-wrap:hover .envelope { transform: translateY(-4px); }
-
-  .flap {
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 60%;
-    background: linear-gradient(155deg, #3a2c5e, #2a2049);
-    clip-path: polygon(0 0, 100% 0, 50% 85%);
-    transform-origin: top;
-    transition: transform 0.7s cubic-bezier(0.6, 0.05, 0.2, 1);
-    border-bottom: 1px solid rgba(230, 185, 92, 0.25);
-  }
-
-  .envelope-wrap.open .flap {
-    transform: rotateX(180deg);
-  }
-
-  .seal {
-    position: absolute;
-    top: 42%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 46px;
-    height: 46px;
-    background: var(--rose);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    color: var(--night-deep);
-    font-size: 20px;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.4);
-    z-index: 3;
-    transition: opacity 0.3s ease;
-  }
-
-  .envelope-wrap.open .seal { opacity: 0; }
-
-  .tap-label {
-    margin-top: 20px;
-    font-size: 14px;
-    color: var(--lavender);
-    letter-spacing: 0.02em;
-  }
-
-  .envelope-wrap.open .tap-label { opacity: 0; }
-
-  /* LETTER */
-  .letter {
-    margin-top: 48px;
-    max-width: 480px;
-    text-align: left;
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s;
-  }
-
-  .letter.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .letter p {
+  section.note p {
     font-family: 'Fraunces', serif;
     font-size: 19px;
     line-height: 1.75;
-    color: var(--ivory);
+    color: var(--plum);
     margin-bottom: 20px;
   }
 
-  .letter p.signature {
+  section.note p.signature {
     font-style: italic;
-    color: var(--rose);
-    margin-top: 32px;
+    color: var(--coral);
+    margin-top: 28px;
   }
 
-  /* PROMISES */
-  section.promises {
-    padding-top: 14vh;
+  /* THINGS I LOVE */
+  section.things {
+    padding-top: 12vh;
   }
 
-  section.promises h2 {
+  section.things h2 {
     font-family: 'Fraunces', serif;
     font-weight: 500;
     font-style: italic;
-    font-size: 28px;
-    color: var(--rose);
-    margin-bottom: 32px;
+    font-size: 27px;
+    color: var(--coral);
+    margin-bottom: 30px;
   }
 
-  .promise-item {
+  section.things h2::before {
+    content: "♡";
+    display: block;
+    font-size: 20px;
+    color: var(--coral);
+    margin-bottom: 10px;
+    font-style: normal;
+  }
+
+  .thing-item {
     display: flex;
     gap: 14px;
-    padding: 18px 0;
-    border-top: 1px solid rgba(230, 185, 92, 0.18);
+    padding: 18px 20px;
+    margin-bottom: 12px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.6);
     font-size: 16px;
     line-height: 1.6;
-    color: var(--ivory);
+    color: var(--plum);
+    transition: transform 0.3s ease, background 0.3s ease;
   }
 
-  .promise-item:last-child {
-    border-bottom: 1px solid rgba(230, 185, 92, 0.18);
+  .thing-item:hover {
+    transform: translateX(4px);
+    background: rgba(255, 255, 255, 0.8);
   }
 
-  .promise-item .mark {
+  .thing-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .thing-item .mark {
     color: var(--gold);
     font-family: 'Fraunces', serif;
     font-style: italic;
     flex-shrink: 0;
   }
+
+  /* WISH BUTTON */
+  section.wish {
+    padding-top: 14vh;
+    text-align: center;
+  }
+
+  section.wish h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-style: italic;
+    font-size: 26px;
+    color: var(--coral);
+    margin-bottom: 26px;
+  }
+
+  section.wish h2::before {
+    content: "♡";
+    display: block;
+    font-size: 20px;
+    color: var(--coral);
+    margin-bottom: 10px;
+    font-style: normal;
+  }
+
+  .wish-box {
+    background: linear-gradient(155deg, var(--peach), #fff0f5);
+    border-radius: 18px;
+    padding: 40px 28px;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.3s ease;
+    box-shadow: 0 24px 50px -24px rgba(244, 145, 179, 0.5);
+  }
+
+  .wish-box:hover { transform: translateY(-4px); }
+
+  .wish-box p.prompt {
+    font-size: 15px;
+    color: var(--plum-soft);
+  }
+
+  .wish-box p.result {
+    display: none;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 20px;
+    color: var(--plum);
+    line-height: 1.6;
+  }
+
+  .wish-box.revealed p.prompt { display: none; }
+  .wish-box.revealed p.result { display: block; }
 
   /* SONG */
   section.song {
@@ -266,25 +368,25 @@
     font-weight: 500;
     font-style: italic;
     font-size: 26px;
-    color: var(--rose);
+    color: var(--coral);
     margin-bottom: 10px;
   }
 
   section.song p {
     font-size: 15px;
-    color: var(--lavender);
+    color: var(--plum-soft);
     margin-bottom: 28px;
   }
 
   .spotify-frame {
     border-radius: 14px;
     overflow: hidden;
-    box-shadow: 0 24px 50px -20px rgba(0,0,0,0.6);
+    box-shadow: 0 24px 50px -24px rgba(60, 42, 69, 0.35);
   }
 
   /* CLOSING */
   section.closing {
-    padding-top: 20vh;
+    padding-top: 18vh;
     text-align: center;
   }
 
@@ -292,82 +394,133 @@
     font-family: 'Fraunces', serif;
     font-style: italic;
     font-size: 22px;
-    color: var(--ivory);
+    color: var(--plum);
     line-height: 1.6;
   }
 
-  section.closing .heart {
+  section.closing .sunmark {
     margin-top: 24px;
-    color: var(--rose);
-    font-size: 22px;
+    font-size: 26px;
+    color: var(--coral);
   }
 </style>
 </head>
 <body>
 
-<div class="stars"></div>
+<div class="blobs">
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  <div class="blob b3"></div>
+  <div class="blob b4"></div>
+</div>
+
+<div class="floating-hearts">
+  <span style="left:8%; animation-duration:14s; animation-delay:0s; font-size:16px;">♡</span>
+  <span style="left:22%; animation-duration:18s; animation-delay:3s; font-size:22px;">♡</span>
+  <span style="left:38%; animation-duration:15s; animation-delay:1s; font-size:14px;">♡</span>
+  <span style="left:55%; animation-duration:20s; animation-delay:5s; font-size:20px;">♡</span>
+  <span style="left:70%; animation-duration:16s; animation-delay:2s; font-size:16px;">♡</span>
+  <span style="left:85%; animation-duration:19s; animation-delay:6s; font-size:24px;">♡</span>
+  <span style="left:15%; animation-duration:17s; animation-delay:8s; font-size:18px;">♡</span>
+  <span style="left:63%; animation-duration:13s; animation-delay:9s; font-size:14px;">♡</span>
+</div>
 
 <main>
 
   <section class="hero">
+    <div class="sun">
+      <span class="sparkle" style="top:-14px; left:20px; font-size:12px;">✦</span>
+      <span class="sparkle" style="top:30px; left:-24px; font-size:16px; animation-delay:0.6s;">✦</span>
+      <span class="sparkle" style="bottom:-10px; right:10px; font-size:10px; animation-delay:1.2s;">✦</span>
+    </div>
     <p class="eyebrow">para mi niña linda</p>
-    <h1>Buenas noches,<br><em>amorcito.</em></h1>
-    <p class="sub">Antes de que te duermas, quiero que leas algo. No es mucho, pero es todo lo que traigo hoy para ti.</p>
-    <p class="scroll-hint"><span class="arrow">↓</span> desliza despacito</p>
+    <h1>Buenos días,<br><em>mi reina.</em></h1>
+    <p class="sub">Antes de que agarres el teléfono para ver mil cosas, quiero ser lo primero bonito que veas hoy.</p>
+    <p class="scroll-hint"><span class="arrow">↓</span> sigue bajando</p>
   </section>
 
-  <section class="letter-section">
-    <div class="envelope-wrap" id="envelope">
-      <div class="envelope">
-        <div class="flap"></div>
-        <div class="seal">Y</div>
-      </div>
-      <p class="tap-label">toca el sobre para abrirlo</p>
-    </div>
+  <p class="divider reveal">♡ ♡ ♡</p>
 
-    <div class="letter" id="letter">
-      <p>Sé que hoy no fue un día fácil para ti. Y aunque a veces no lo demuestro como debería, quiero que te quede clarísimo: me importas muchísimo más de lo que te imaginas.</p>
-      <p>No siempre acierto. A veces se me olvidan las palabras correctas, o me tardo en darme cuenta de que algo te está doliendo. Pero eso no significa que no esté aquí, con todas las ganas de cuidarte mejor cada día.</p>
-      <p>Quiero ser ese lugar al que llegas cansada, triste, o como sea que te sientas, y sentir que no estás sola ahí. Quiero aprender a escucharte con más calma, a estar más presente, a hacerte sentir mi reina todos los días y no solo cuando me acuerdo.</p>
-      <p>Así que aquí estoy, mi princesa, mi dueña, mi amorcito... prometiéndote que voy a esforzarme más. Que cada "buenas noches" va a traer detrás muchas ganas de cuidarte de verdad.</p>
-      <p>Descansa, niña linda. Mañana empezamos de nuevo, y ahí voy a estar, como siempre.</p>
-      <p class="signature">Te quiero muchísimo. Fermin — el que más piensa en ti</p>
+  <section class="note reveal">
+    <div class="note-card">
+      <p>Espero que hayas dormido rico, y que hayas soñado algo bonito. Aunque sea desde lejos, quiero que sientas que ya estaba pensando en ti antes de que abrieras los ojos.</p>
+      <p>Ojalá pudiera darte los buenos días de verdad, con un abrazo despacito y sin prisa. Mientras tanto, aquí te dejo esto: un pedacito de mi cariño para que lo cargues contigo todo el día.</p>
+      <p>Hoy quiero que te vaya bonito. Que las cosas se te acomoden más fáciles de lo normal, que alguien te saque una sonrisa sin que lo esperes, y que en algún momentito del día te acuerdes de que hay alguien pensándote con muchísimo cariño.</p>
+      <p class="signature">Arriba, dormilona. El mundo te está esperando, y yo también.</p>
     </div>
   </section>
 
-  <section class="promises">
-    <h2>lo que te prometo</h2>
-    <div class="promise-item"><span class="mark">·</span><span>Escucharte con más calma, aunque el mensaje sea larguísimo.</span></div>
-    <div class="promise-item"><span class="mark">·</span><span>Preguntarte cómo estás de verdad, no solo por preguntar.</span></div>
-    <div class="promise-item"><span class="mark">·</span><span>Recordarte lo mucho que me importas, todos los días y no solo cuando lo noto tarde.</span></div>
-    <div class="promise-item"><span class="mark">·</span><span>No dejar que un mensaje corto signifique que me importas menos.</span></div>
+  <p class="divider reveal">♡ ♡ ♡</p>
+
+  <section class="things reveal">
+    <h2>cositas que me encantan de ti</h2>
+    <div class="thing-item"><span class="mark">♡</span><span>Tu forma de ser, tan bonita y tan tuya.</span></div>
+    <div class="thing-item"><span class="mark">♡</span><span>Que aunque te cueste expresarte, siempre le echas ganas a intentarlo.</span></div>
+    <div class="thing-item"><span class="mark">♡</span><span>Lo trabajadora que eres, eso lo admiro muchísimo de ti.</span></div>
+    <div class="thing-item"><span class="mark">♡</span><span>Lo hermosa que eres, por dentro y por fuera.</span></div>
   </section>
 
-  <section class="song">
-    <h2>algo para acompañarte</h2>
-    <p>505 — Arctic Monkeys</p>
+  <p class="divider reveal">♡ ♡ ♡</p>
+
+  <section class="wish reveal">
+    <h2>para hoy</h2>
+    <div class="wish-box" id="wishBox">
+      <p class="prompt">toca aquí</p>
+      <p class="result">Que tengas un día tan bonito como te mereces, niña linda. Y si algo sale mal, aquí voy a estar para escucharte.</p>
+    </div>
+  </section>
+
+  <p class="divider reveal">♡ ♡ ♡</p>
+
+  <section class="song reveal">
+    <h2>tu canción de esta mañana</h2>
+    <p>I Love You So — The Walters</p>
     <div class="spotify-frame">
-      <iframe style="border-radius:14px" src="https://open.spotify.com/embed/track/0BxE4FqsDD1Ot4YuBXwAPp?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <iframe style="border-radius:14px" src="https://open.spotify.com/embed/track/4SqWKzw0CbA05TGszDgMlc?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
     </div>
   </section>
 
-  <section class="closing">
-    <p>Gracias por aguantarme, niña linda.<br>Te quiero cuidar bien.</p>
-    <p class="heart">♥</p>
+  <section class="closing reveal">
+    <p>Que tengas un lindo día, mi amor.<br>Te quiero muchísimo.</p>
+    <p class="sunmark">♡</p>
   </section>
 
 </main>
 
 <script>
-  const envelope = document.getElementById('envelope');
-  const letter = document.getElementById('letter');
-
-  envelope.addEventListener('click', () => {
-    envelope.classList.add('open');
-    setTimeout(() => {
-      letter.classList.add('visible');
-    }, 400);
+  const wishBox = document.getElementById('wishBox');
+  wishBox.addEventListener('click', () => {
+    wishBox.classList.add('revealed');
+    for (let i = 0; i < 10; i++) {
+      const heart = document.createElement('span');
+      heart.textContent = '♡';
+      heart.style.position = 'fixed';
+      heart.style.left = (wishBox.getBoundingClientRect().left + wishBox.offsetWidth / 2 + (Math.random() * 80 - 40)) + 'px';
+      heart.style.top = wishBox.getBoundingClientRect().top + 'px';
+      heart.style.color = '#f491b3';
+      heart.style.fontSize = (14 + Math.random() * 14) + 'px';
+      heart.style.pointerEvents = 'none';
+      heart.style.zIndex = '999';
+      heart.style.transition = 'transform 1.4s ease-out, opacity 1.4s ease-out';
+      document.body.appendChild(heart);
+      requestAnimationFrame(() => {
+        heart.style.transform = `translateY(-${100 + Math.random() * 80}px)`;
+        heart.style.opacity = '0';
+      });
+      setTimeout(() => heart.remove(), 1500);
+    }
   });
+
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach((el) => observer.observe(el));
 </script>
 
 </body>
