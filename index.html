@@ -50,18 +50,51 @@
       radial-gradient(ellipse at 50% 20%, var(--night-3) 0%, var(--night-2) 45%, var(--night-1) 100%);
   }
 
-  .moon{
+  .moon-wrap{
     position: fixed;
     top: 6vh;
     right: 8vw;
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 35% 30%, var(--moon), #e4d9b0 60%, #c9bd90 100%);
-    box-shadow: 0 0 40px 6px rgba(253,246,227,0.35);
+    width: 84px;
+    height: 84px;
     z-index: 1;
     opacity: 0;
-    animation: fadeIn 2s ease forwards 0.4s;
+    animation: fadeIn 2.2s ease forwards 0.4s;
+  }
+
+  .moon-halo{
+    position: absolute;
+    inset: -30px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(253,246,227,0.28) 0%, rgba(253,246,227,0.08) 45%, transparent 75%);
+    animation: haloPulse 5s ease-in-out infinite;
+  }
+
+  @keyframes haloPulse{
+    0%,100%{ transform: scale(1); opacity: 0.8; }
+    50%{ transform: scale(1.12); opacity: 1; }
+  }
+
+  .moon{
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 32% 28%, rgba(255,255,255,0.9) 0%, transparent 3%),
+      radial-gradient(circle at 62% 60%, rgba(180,168,130,0.55) 0%, transparent 12%),
+      radial-gradient(circle at 40% 68%, rgba(180,168,130,0.45) 0%, transparent 9%),
+      radial-gradient(circle at 70% 30%, rgba(180,168,130,0.4) 0%, transparent 8%),
+      radial-gradient(circle at 25% 55%, rgba(180,168,130,0.35) 0%, transparent 7%),
+      radial-gradient(circle at 50% 40%, var(--moon) 0%, #e8dcae 55%, #cabf8e 100%);
+      box-shadow:
+        inset -10px -8px 18px rgba(120,108,70,0.45),
+        inset 6px 6px 14px rgba(255,255,255,0.5),
+        0 0 30px 4px rgba(253,246,227,0.4);
+    animation: moonDrift 12s ease-in-out infinite;
+  }
+
+  @keyframes moonDrift{
+    0%,100%{ transform: translateY(0) rotate(0deg); }
+    50%{ transform: translateY(-6px) rotate(2deg); }
   }
 
   .content{
@@ -267,7 +300,7 @@
     opacity: 0.5;
   }
 
-  /* ---------- BACKGROUND MUSIC (hidden) ---------- */
+  /* ---------- BACKGROUND MUSIC ---------- */
 
   #music-embed{
     position: fixed;
@@ -279,33 +312,116 @@
     left: -9999px;
   }
 
-  #enter-veil{
-    position: fixed;
-    inset: 0;
-    z-index: 50;
-    background: var(--night-1);
+  /* ---------- MUSIC CARD ---------- */
+
+  .music-card{
+    max-width: 380px;
+    margin: 4vh auto 12vh;
+    padding: 1.3em 1.5em;
+    border-radius: 18px;
+    background: linear-gradient(160deg, rgba(255,255,255,0.05), rgba(255,255,255,0.015));
+    border: 1px solid rgba(244,213,141,0.22);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.05);
+    backdrop-filter: blur(10px);
     display: flex;
     align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: opacity 0.8s ease;
-  }
-
-  #enter-veil p{
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    color: var(--gold);
-    font-size: 1.1rem;
-    letter-spacing: 0.03em;
-    opacity: 0.85;
-  }
-
-  #enter-veil.hidden{
+    gap: 1em;
     opacity: 0;
+    transform: translateY(10px);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .music-card::before{
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 15% 20%, rgba(244,213,141,0.12), transparent 55%);
     pointer-events: none;
   }
 
-  /* ---------- CLOSING ---------- */
+  .music-card.revealed{ animation: rise 1s ease forwards; }
+
+  .music-card .art{
+    flex: none;
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--nebula), var(--night-3));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+  }
+
+  .music-card .eq{
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 18px;
+  }
+
+  .music-card .eq span{
+    display: block;
+    width: 3px;
+    background: var(--gold);
+    border-radius: 2px;
+    animation: eq 1s ease-in-out infinite;
+    opacity: 0.9;
+  }
+
+  .music-card .eq span:nth-child(1){ height: 40%; animation-delay: 0s; }
+  .music-card .eq span:nth-child(2){ height: 90%; animation-delay: 0.2s; }
+  .music-card .eq span:nth-child(3){ height: 60%; animation-delay: 0.35s; }
+  .music-card .eq span:nth-child(4){ height: 100%; animation-delay: 0.1s; }
+
+  .music-card.paused .eq span{ animation-play-state: paused; height: 25% !important; }
+
+  @keyframes eq{
+    0%,100%{ transform: scaleY(0.4); }
+    50%{ transform: scaleY(1); }
+  }
+
+  .music-card .info{ flex: 1; text-align: left; z-index: 1; }
+
+  .music-card .info .song{
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--paper);
+  }
+
+  .music-card .info .artist{
+    font-size: 0.78rem;
+    letter-spacing: 0.03em;
+    color: var(--lavender);
+    opacity: 0.8;
+    margin-top: 0.2em;
+  }
+
+  .music-card button.play{
+    flex: none;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid var(--gold);
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold);
+    font-size: 1rem;
+    cursor: pointer;
+    z-index: 1;
+    transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease;
+  }
+
+  .music-card button.play:hover,
+  .music-card button.play:focus-visible{
+    background: var(--gold);
+    color: var(--night-1);
+    transform: scale(1.05);
+  }
 
   .closing{
     text-align: center;
@@ -341,7 +457,10 @@
 
 <canvas id="sky"></canvas>
 <div class="nebula-glow"></div>
-<div class="moon" aria-hidden="true"></div>
+<div class="moon-wrap" aria-hidden="true">
+  <div class="moon-halo"></div>
+  <div class="moon"></div>
+</div>
 
 <div class="content">
 
@@ -385,17 +504,23 @@
     <p class="body-text">Cuando te digo que te duermas temprano no es porque no quiera hablarte, todo lo contrario. La verdad es que yo sufro más que tú al no poder hablarte, aguanto mil dagas enterradas en el corazón con tal de dejarte descansar. Pero te lo pido porque te quiero bien, porque mereces dormir tus horas y cuidarte, tanto en lo que comes como en lo que descansas. Prefiero mil veces sentir yo esa espinita de no hablarte, a que tú sacrifiques tu salud por quedarte platicando conmigo.</p>
   </section>
 
-  <div id="music-embed"></div>
+  <div class="music-card paused" id="music-card">
+    <div id="music-embed"></div>
+    <div class="art">
+      <div class="eq"><span></span><span></span><span></span><span></span></div>
+    </div>
+    <div class="info">
+      <div class="song">Visita</div>
+      <div class="artist">Enjambre</div>
+    </div>
+    <button class="play" id="play-btn" aria-label="Reproducir">▶</button>
+  </div>
 
   <section class="closing">
     <p class="signature">te amo, hoy y todas las noches</p>
     <p class="date">tu Fermin ✦</p>
   </section>
 
-</div>
-
-<div id="enter-veil">
-  <p>toca para entrar ✦</p>
 </div>
 
 <script>
@@ -492,8 +617,8 @@
   }, { threshold: 0.4 });
   heartObserver.observe(document.querySelector('.constellation-wrap'));
 
-  // Letter reveal on scroll
-  const reveals = document.querySelectorAll('.letter');
+  // Letter and music card reveal on scroll
+  const reveals = document.querySelectorAll('.letter, .music-card');
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if(entry.isIntersecting){
@@ -530,13 +655,23 @@
     document.body.appendChild(tag);
   })();
 
-  const veil = document.getElementById('enter-veil');
-  veil.addEventListener('click', () => {
-    veil.classList.add('hidden');
-    if(spotifyController){
+  const playBtn = document.getElementById('play-btn');
+  const musicCard = document.getElementById('music-card');
+  let isPlaying = false;
+
+  playBtn.addEventListener('click', () => {
+    if(!spotifyController) return;
+    if(isPlaying){
+      spotifyController.pause();
+      musicCard.classList.add('paused');
+      playBtn.textContent = '▶';
+    } else {
       spotifyController.play();
+      musicCard.classList.remove('paused');
+      playBtn.textContent = '❚❚';
     }
-  }, { once: true });
+    isPlaying = !isPlaying;
+  });
 </script>
 
 </body>
