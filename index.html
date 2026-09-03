@@ -3,675 +3,276 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Para ti, Yamileth</title>
+<title>Yamileth</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Poppins:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --night-1: #05060f;
-    --night-2: #0d1230;
-    --night-3: #1a2158;
-    --nebula: #3a2b6b;
-    --gold: #f4d58d;
-    --blush: #f3afc0;
-    --lavender: #d8cbf0;
-    --paper: #f7f5ff;
-    --moon: #fdf6e3;
+    --cream: #FFF8F1;
+    --pink: #F3D6DE;
+    --lavender: #E4D9F0;
+    --mint: #DCEFE3;
+    --rose: #D98FA3;
+    --plum: #5B4B5C;
+    --gold: #D9B36A;
   }
 
-  *{ box-sizing: border-box; margin:0; padding:0; }
+  * { box-sizing: border-box; margin:0; padding:0; }
 
-  html{ scroll-behavior: smooth; }
+  html,body{
+    min-height:100%;
+    background: linear-gradient(180deg, var(--cream) 0%, var(--pink) 55%, var(--lavender) 100%);
+    font-family: 'Quicksand', sans-serif;
+    color: var(--plum);
+    overflow-x:hidden;
+  }
 
   body{
-    background: var(--night-1);
-    color: var(--paper);
-    font-family: 'Poppins', sans-serif;
-    font-weight: 300;
-    overflow-x: hidden;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    min-height:100vh;
+    padding: 32px 20px 60px;
+    position:relative;
   }
 
-  #sky{
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
+  /* --- floating petals background --- */
+  .petal{
+    position:fixed;
+    top:-40px;
+    z-index:0;
+    opacity:0.7;
+    pointer-events:none;
+    animation: fall linear infinite;
+  }
+  @keyframes fall{
+    0%{ transform: translateY(-5vh) rotate(0deg); }
+    100%{ transform: translateY(110vh) rotate(360deg); }
   }
 
-  .nebula-glow{
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    background:
-      radial-gradient(ellipse 60% 40% at 25% 15%, rgba(58,43,107,0.55) 0%, transparent 60%),
-      radial-gradient(ellipse 50% 35% at 80% 65%, rgba(243,175,192,0.12) 0%, transparent 55%),
-      radial-gradient(ellipse at 50% 20%, var(--night-3) 0%, var(--night-2) 45%, var(--night-1) 100%);
+  .card{
+    position:relative;
+    z-index:2;
+    max-width: 420px;
+    width:100%;
+    background: rgba(255,255,255,0.55);
+    backdrop-filter: blur(6px);
+    border-radius: 28px;
+    padding: 40px 28px 34px;
+    box-shadow: 0 20px 50px rgba(91,75,92,0.15);
+    text-align:center;
+    border: 1px solid rgba(255,255,255,0.6);
   }
 
-  .moon-wrap{
-    position: fixed;
-    top: 6vh;
-    right: 8vw;
-    width: 84px;
-    height: 84px;
-    z-index: 1;
-    opacity: 0;
-    animation: fadeIn 2.2s ease forwards 0.4s;
+  .flowers-row{
+    display:flex;
+    justify-content:center;
+    gap: 6px;
+    margin-bottom: 6px;
+  }
+  .flowers-row svg{ width: 46px; height: 60px; }
+
+  h1{
+    font-family:'Caveat', cursive;
+    font-weight:700;
+    font-size: 2.6rem;
+    line-height:1.15;
+    color: var(--rose);
+    margin: 6px 0 4px;
   }
 
-  .moon-halo{
-    position: absolute;
-    inset: -30px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(253,246,227,0.28) 0%, rgba(253,246,227,0.08) 45%, transparent 75%);
-    animation: haloPulse 5s ease-in-out infinite;
+  .name{
+    font-family:'Caveat', cursive;
+    font-weight:700;
+    font-size: 3.1rem;
+    color: var(--plum);
+    margin-bottom: 10px;
   }
 
-  @keyframes haloPulse{
-    0%,100%{ transform: scale(1); opacity: 0.8; }
-    50%{ transform: scale(1.12); opacity: 1; }
-  }
-
-  .moon{
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
-    background:
-      radial-gradient(circle at 32% 28%, rgba(255,255,255,0.9) 0%, transparent 3%),
-      radial-gradient(circle at 62% 60%, rgba(180,168,130,0.55) 0%, transparent 12%),
-      radial-gradient(circle at 40% 68%, rgba(180,168,130,0.45) 0%, transparent 9%),
-      radial-gradient(circle at 70% 30%, rgba(180,168,130,0.4) 0%, transparent 8%),
-      radial-gradient(circle at 25% 55%, rgba(180,168,130,0.35) 0%, transparent 7%),
-      radial-gradient(circle at 50% 40%, var(--moon) 0%, #e8dcae 55%, #cabf8e 100%);
-      box-shadow:
-        inset -10px -8px 18px rgba(120,108,70,0.45),
-        inset 6px 6px 14px rgba(255,255,255,0.5),
-        0 0 30px 4px rgba(253,246,227,0.4);
-    animation: moonDrift 12s ease-in-out infinite;
-  }
-
-  @keyframes moonDrift{
-    0%,100%{ transform: translateY(0) rotate(0deg); }
-    50%{ transform: translateY(-6px) rotate(2deg); }
-  }
-
-  .content{
-    position: relative;
-    z-index: 2;
-  }
-
-  /* ---------- HERO ---------- */
-
-  .hero{
-    min-height: 100svh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 8vh 6vw;
-  }
-
-  .hero .eyebrow{
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: clamp(1rem, 2vw, 1.25rem);
-    color: var(--gold);
-    letter-spacing: 0.04em;
-    opacity: 0;
-    animation: fadeIn 1.4s ease forwards 0.3s;
-  }
-
-  .hero h1{
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 500;
-    font-size: clamp(2.8rem, 9vw, 5.5rem);
-    line-height: 1.05;
-    margin-top: 0.3em;
-    background: linear-gradient(180deg, var(--paper) 30%, var(--lavender) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    opacity: 0;
-    animation: fadeIn 1.6s ease forwards 0.7s;
-  }
-
-  .hero p.sub{
-    margin-top: 1.4em;
-    max-width: 34ch;
-    font-size: clamp(0.95rem, 1.6vw, 1.05rem);
-    color: var(--lavender);
-    line-height: 1.7;
-    opacity: 0;
-    animation: fadeIn 1.6s ease forwards 1.2s;
-  }
-
-  .scroll-cue{
-    margin-top: 4em;
-    width: 1px;
-    height: 50px;
-    background: linear-gradient(var(--gold), transparent);
-    opacity: 0;
-    animation: fadeIn 1.6s ease forwards 1.8s, pulseLine 2.4s ease-in-out infinite 2s;
-  }
-
-  @keyframes fadeIn{ to{ opacity: 1; } }
-  @keyframes pulseLine{
-    0%,100%{ opacity: 0.3; }
-    50%{ opacity: 0.9; }
-  }
-
-  /* ---------- CONSTELLATION ---------- */
-
-  .constellation-wrap{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.8em;
-    padding: 4vh 6vw 2vh;
-  }
-
-  .constellation-wrap svg{
-    width: min(340px, 80vw);
-    height: auto;
-  }
-
-  .constellation-wrap .caption{
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 0.95rem;
-    color: var(--lavender);
-    opacity: 0;
-  }
-
-  .constellation-wrap .caption.shown{
-    animation: fadeIn 1.4s ease forwards;
-  }
-
-  .constellation-wrap path{
-    fill: none;
-    stroke: var(--gold);
-    stroke-width: 1.2;
-    stroke-linecap: round;
-    stroke-dasharray: 900;
-    stroke-dashoffset: 900;
-  }
-
-  .constellation-wrap path.drawn{
-    animation: draw 2.6s ease forwards;
-  }
-
-  @keyframes draw{ to{ stroke-dashoffset: 0; } }
-
-  .constellation-wrap circle{
-    fill: var(--gold);
-    opacity: 0;
-  }
-
-  .constellation-wrap circle.lit{
-    animation: litUp 0.6s ease forwards;
-  }
-
-  @keyframes litUp{ to{ opacity: 1; } }
-
-  /* ---------- LETTER SECTIONS ---------- */
-
-  .letter{
-    position: relative;
-    max-width: 620px;
-    margin: 0 auto;
-    padding: 10vh 7vw;
-  }
-
-  .letter .floaty{
-    position: absolute;
-    color: var(--gold);
-    opacity: 0;
-    pointer-events: none;
-    animation: floatUp 6s ease-in infinite;
-  }
-
-  .letter .floaty.f1{ left: 6%; top: 78%; font-size: 0.7rem; animation-delay: 0s; }
-  .letter .floaty.f2{ left: 88%; top: 62%; font-size: 0.5rem; animation-delay: 2s; }
-  .letter .floaty.f3{ left: 14%; top: 20%; font-size: 0.55rem; animation-delay: 4s; }
-  .letter .floaty.f4{ left: 80%; top: 15%; font-size: 0.65rem; animation-delay: 1.3s; }
-
-  @keyframes floatUp{
-    0%{ opacity: 0; transform: translateY(0) scale(0.8); }
-    15%{ opacity: 0.8; }
-    85%{ opacity: 0.5; }
-    100%{ opacity: 0; transform: translateY(-60px) scale(1.1); }
-  }
-
-  .letter .mark{
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    color: var(--blush);
-    font-size: 1.2rem;
-    margin-bottom: 1.2em;
-    opacity: 0;
-    transform: translateY(10px);
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5em;
-  }
-
-  .letter .mark .spark{
-    display: inline-block;
-    color: var(--gold);
-    font-size: 0.85em;
-    animation: sparkle 1.8s ease-in-out infinite;
-  }
-
-  .letter .mark .spark.d2{ animation-delay: 0.6s; }
-
-  @keyframes sparkle{
-    0%, 100%{ opacity: 0.35; transform: scale(0.8) rotate(0deg); }
-    50%{ opacity: 1; transform: scale(1.15) rotate(15deg); }
-  }
-
-  .letter p.body-text{
-    font-size: clamp(1.05rem, 2vw, 1.2rem);
-    line-height: 1.95;
-    color: var(--paper);
-    font-weight: 300;
-    opacity: 0;
-    transform: translateY(10px);
-  }
-
-  .letter.revealed .mark,
-  .letter.revealed p.body-text{
-    animation: rise 1s ease forwards;
-  }
-
-  .letter.revealed p.body-text{ animation-delay: 0.15s; }
-
-  @keyframes rise{
-    to{ opacity: 1; transform: translateY(0); }
-  }
-
-  .divider{
-    width: 40px;
-    height: 1px;
-    margin: 0 auto;
-    background: var(--gold);
-    opacity: 0.5;
-  }
-
-  /* ---------- BACKGROUND MUSIC ---------- */
-
-  #music-embed{
-    position: fixed;
-    width: 1px;
-    height: 1px;
-    opacity: 0;
-    pointer-events: none;
-    overflow: hidden;
-    left: -9999px;
-  }
-
-  /* ---------- MUSIC CARD ---------- */
-
-  .music-card{
-    max-width: 380px;
-    margin: 4vh auto 12vh;
-    padding: 1.3em 1.5em;
-    border-radius: 18px;
-    background: linear-gradient(160deg, rgba(255,255,255,0.05), rgba(255,255,255,0.015));
-    border: 1px solid rgba(244,213,141,0.22);
-    box-shadow: 0 8px 30px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.05);
-    backdrop-filter: blur(10px);
-    display: flex;
-    align-items: center;
-    gap: 1em;
-    opacity: 0;
-    transform: translateY(10px);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .music-card::before{
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 15% 20%, rgba(244,213,141,0.12), transparent 55%);
-    pointer-events: none;
-  }
-
-  .music-card.revealed{ animation: rise 1s ease forwards; }
-
-  .music-card .art{
-    flex: none;
-    width: 52px;
-    height: 52px;
-    border-radius: 12px;
-    background: linear-gradient(135deg, var(--nebula), var(--night-3));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.4);
-  }
-
-  .music-card .eq{
-    display: flex;
-    align-items: flex-end;
-    gap: 3px;
-    height: 18px;
-  }
-
-  .music-card .eq span{
-    display: block;
-    width: 3px;
-    background: var(--gold);
-    border-radius: 2px;
-    animation: eq 1s ease-in-out infinite;
-    opacity: 0.9;
-  }
-
-  .music-card .eq span:nth-child(1){ height: 40%; animation-delay: 0s; }
-  .music-card .eq span:nth-child(2){ height: 90%; animation-delay: 0.2s; }
-  .music-card .eq span:nth-child(3){ height: 60%; animation-delay: 0.35s; }
-  .music-card .eq span:nth-child(4){ height: 100%; animation-delay: 0.1s; }
-
-  .music-card.paused .eq span{ animation-play-state: paused; height: 25% !important; }
-
-  @keyframes eq{
-    0%,100%{ transform: scaleY(0.4); }
-    50%{ transform: scaleY(1); }
-  }
-
-  .music-card .info{ flex: 1; text-align: left; z-index: 1; }
-
-  .music-card .info .song{
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 1.2rem;
-    color: var(--paper);
-  }
-
-  .music-card .info .artist{
-    font-size: 0.78rem;
-    letter-spacing: 0.03em;
-    color: var(--lavender);
-    opacity: 0.8;
-    margin-top: 0.2em;
-  }
-
-  .music-card button.play{
-    flex: none;
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    border: 1px solid var(--gold);
-    background: transparent;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--gold);
+  p.msg{
     font-size: 1rem;
-    cursor: pointer;
-    z-index: 1;
-    transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease;
+    line-height:1.6;
+    color: var(--plum);
+    opacity:0.9;
+    margin: 14px 0 26px;
   }
 
-  .music-card button.play:hover,
-  .music-card button.play:focus-visible{
-    background: var(--gold);
-    color: var(--night-1);
-    transform: scale(1.05);
+  .question{
+    font-family:'Caveat', cursive;
+    font-size: 2rem;
+    color: var(--plum);
+    margin-bottom: 22px;
   }
 
-  .closing{
-    text-align: center;
-    padding: 6vh 6vw 14vh;
+  .buttons{
+    position:relative;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap: 18px;
+    height: 60px;
   }
 
-  .closing .signature{
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: clamp(1.6rem, 4vw, 2.2rem);
-    color: var(--gold);
+  button{
+    font-family:'Quicksand', sans-serif;
+    font-weight:600;
+    font-size: 1rem;
+    border:none;
+    border-radius: 999px;
+    padding: 14px 30px;
+    cursor:pointer;
+    transition: transform .15s ease;
   }
 
-  .closing .date{
-    margin-top: 0.6em;
-    font-size: 0.8rem;
-    letter-spacing: 0.08em;
-    color: var(--lavender);
-    opacity: 0.7;
+  #yesBtn{
+    background: var(--rose);
+    color: white;
+    box-shadow: 0 8px 20px rgba(217,143,163,0.5);
+  }
+  #yesBtn:hover{ transform: scale(1.06); }
+
+  #noBtn{
+    background: white;
+    color: var(--plum);
+    position:relative;
+    border: 1px solid rgba(91,75,92,0.15);
   }
 
-  a:focus-visible, button:focus-visible{
-    outline: 2px solid var(--gold);
-    outline-offset: 3px;
+  .stage{ display:none; }
+  .stage.active{ display:block; }
+
+  .final h1{ font-size: 2.2rem; }
+  .final .name{ font-size: 3.4rem; }
+  .final-heart{ font-size: 2.4rem; margin-top: 6px; }
+
+  .footer-note{
+    margin-top: 22px;
+    font-size: 0.78rem;
+    color: var(--plum);
+    opacity: 0.55;
   }
 
-  @media (prefers-reduced-motion: reduce){
-    *{ animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
+  @media (max-width: 380px){
+    h1{ font-size: 2.2rem; }
+    .name{ font-size: 2.6rem; }
+    .question{ font-size: 1.7rem; }
   }
 </style>
 </head>
 <body>
 
-<canvas id="sky"></canvas>
-<div class="nebula-glow"></div>
-<div class="moon-wrap" aria-hidden="true">
-  <div class="moon-halo"></div>
-  <div class="moon"></div>
-</div>
+<div class="card">
 
-<div class="content">
-
-  <section class="hero">
-    <div class="eyebrow">bajo el mismo cielo</div>
-    <h1>Para ti,<br>Yamileth</h1>
-    <p class="sub">Aunque hoy casi no hablamos, no hubo un solo momento en que dejaras de estar en mi cabeza.</p>
-    <div class="scroll-cue"></div>
-  </section>
-
-  <div class="constellation-wrap">
-    <svg viewBox="0 0 300 260" aria-hidden="true">
-      <path id="heart-path" d="M150,230 C 60,160 10,100 40,55 C 65,18 120,20 150,70 C 180,20 235,18 260,55 C 290,100 240,160 150,230 Z" />
-      <circle cx="150" cy="230" r="3"></circle>
-      <circle cx="40" cy="55" r="3"></circle>
-      <circle cx="150" cy="70" r="3"></circle>
-      <circle cx="260" cy="55" r="3"></circle>
-      <circle cx="10" cy="100" r="2.4"></circle>
-      <circle cx="290" cy="100" r="2.4"></circle>
-    </svg>
-    <p class="caption" id="constellation-caption">una constelación, solo para ti</p>
+  <div id="stage1" class="stage active">
+    <div class="flowers-row" id="flowerRow"></div>
+    <h1>Para</h1>
+    <div class="name">Yamileth</div>
+    <p class="msg">
+      Elegí tulipanes y lirios porque, como ellos, quiero que lo nuestro
+      siga floreciendo — con calma, con cuidado, temporada tras temporada.
+    </p>
+    <div class="question">¿Quieres ser mi novia? 🌷</div>
+    <div class="buttons">
+      <button id="yesBtn" onclick="sayYes()">Sí, quiero</button>
+      <button id="noBtn" onclick="dodge()">No</button>
+    </div>
   </div>
 
-  <section class="letter" id="letter-1">
-    <span class="floaty f1">✦</span>
-    <span class="floaty f2">✧</span>
-    <span class="floaty f3">✦</span>
-    <span class="floaty f4">✧</span>
-    <div class="mark"><span class="spark">✦</span>hermosa<span class="spark d2">✦</span></div>
-    <p class="body-text">Sé que la tarea no te dio ni un respiro y que casi no pudimos hablar, pero eso no cambia nada de lo que siento. Aunque el día se llene de pendientes y los mensajes tarden en llegar, sigues siendo lo primero en lo que pienso al despertar y lo último antes de dormir. No necesito que hablemos todo el día para saber que te amo, lo sé aunque pasen las horas en silencio. Descansa, mi amor, mañana lo seguimos platicando con calma.</p>
-  </section>
-
-  <div class="divider"></div>
-
-  <section class="letter" id="letter-2">
-    <span class="floaty f1">✧</span>
-    <span class="floaty f2">✦</span>
-    <span class="floaty f3">✧</span>
-    <span class="floaty f4">✦</span>
-    <div class="mark"><span class="spark">✦</span>linda<span class="spark d2">✦</span></div>
-    <p class="body-text">Cuando te digo que te duermas temprano no es porque no quiera hablarte, todo lo contrario. La verdad es que yo sufro más que tú al no poder hablarte, aguanto mil dagas enterradas en el corazón con tal de dejarte descansar. Pero te lo pido porque te quiero bien, porque mereces dormir tus horas y cuidarte, tanto en lo que comes como en lo que descansas. Prefiero mil veces sentir yo esa espinita de no hablarte, a que tú sacrifiques tu salud por quedarte platicando conmigo.</p>
-  </section>
-
-  <div class="music-card paused" id="music-card">
-    <div id="music-embed"></div>
-    <div class="art">
-      <div class="eq"><span></span><span></span><span></span><span></span></div>
-    </div>
-    <div class="info">
-      <div class="song">Visita</div>
-      <div class="artist">Enjambre</div>
-    </div>
-    <button class="play" id="play-btn" aria-label="Reproducir">▶</button>
+  <div id="stage2" class="stage final">
+    <div class="flowers-row" id="flowerRowFinal"></div>
+    <h1>Sabía que dirías que sí</h1>
+    <div class="name">Yamileth</div>
+    <p class="msg">
+      Gracias por decir que sí. Prometo cuidar esto como se cuida un
+      jardín: con paciencia, con ganas, todos los días.
+    </p>
+    <div class="final-heart">💗🌷🤍</div>
   </div>
 
-  <section class="closing">
-    <p class="signature">te amo, hoy y todas las noches</p>
-    <p class="date">tu Fermin ✦</p>
-  </section>
-
+  <div class="footer-note">hecho con cariño, para ti</div>
 </div>
 
 <script>
-  // Star field, two depth layers for parallax feel
-  const canvas = document.getElementById('sky');
-  const ctx = canvas.getContext('2d');
-  let starsFar = [], starsNear = [];
-
-  function resize(){
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    canvas.style.width = window.innerWidth + 'px';
-    canvas.style.height = window.innerHeight + 'px';
-    generateStars();
+  // ---- SVG flower generators (tulip & lily) ----
+  function tulipSVG(color, stemColor){
+    return `<svg viewBox="0 0 40 60" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20 55 C20 40, 20 30, 20 22" stroke="${stemColor}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M20 40 C16 38, 12 34, 12 30" stroke="${stemColor}" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M20 44 C24 42, 27 38, 28 34" stroke="${stemColor}" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M20 8
+               C13 8, 10 15, 11 22
+               C11 26, 14 28, 20 28
+               C26 28, 29 26, 29 22
+               C30 15, 27 8, 20 8 Z" fill="${color}"/>
+      <path d="M20 10 C17 12, 15 17, 16 22 C16 24, 18 26, 20 26 Z" fill="${color}" opacity="0.55"/>
+      <path d="M20 10 C23 12, 25 17, 24 22 C24 24, 22 26, 20 26 Z" fill="${color}" opacity="0.35"/>
+    </svg>`;
   }
 
-  function makeStars(count, rRange, aRange){
-    return Array.from({length: count}, () => ({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      r: Math.random() * (rRange[1]-rRange[0]) + rRange[0],
-      baseAlpha: Math.random() * (aRange[1]-aRange[0]) + aRange[0],
-      phase: Math.random() * Math.PI * 2,
-      speed: Math.random() * 0.015 + 0.005
-    }));
+  function lilySVG(color, stemColor){
+    return `<svg viewBox="0 0 40 60" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20 55 C20 42, 20 32, 20 24" stroke="${stemColor}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <g transform="translate(20,20)">
+        <path d="M0,0 C -3,-10 -3,-16 0,-20 C 3,-16 3,-10 0,0 Z" fill="${color}"/>
+        <path d="M0,0 C -3,-10 -3,-16 0,-20 C 3,-16 3,-10 0,0 Z" fill="${color}" transform="rotate(72)"/>
+        <path d="M0,0 C -3,-10 -3,-16 0,-20 C 3,-16 3,-10 0,0 Z" fill="${color}" transform="rotate(144)"/>
+        <path d="M0,0 C -3,-10 -3,-16 0,-20 C 3,-16 3,-10 0,0 Z" fill="${color}" transform="rotate(216)"/>
+        <path d="M0,0 C -3,-10 -3,-16 0,-20 C 3,-16 3,-10 0,0 Z" fill="${color}" transform="rotate(288)"/>
+        <circle cx="0" cy="0" r="2.4" fill="#D9B36A"/>
+      </g>
+    </svg>`;
   }
 
-  function generateStars(){
-    const area = canvas.width * canvas.height;
-    starsFar = makeStars(Math.floor(area / 7000), [0.3, 0.8], [0.15, 0.45]);
-    starsNear = makeStars(Math.floor(area / 5000), [0.6, 1.6], [0.4, 0.9]);
+  const palette = ['#D98FA3', '#C9A6E0', '#F2B6C6'];
+  const stem = '#8FBF9F';
+
+  function buildRow(elId){
+    const el = document.getElementById(elId);
+    const combo = [tulipSVG(palette[0], stem), lilySVG(palette[1], stem), tulipSVG(palette[2], stem)];
+    el.innerHTML = combo.join('');
+  }
+  buildRow('flowerRow');
+  buildRow('flowerRowFinal');
+
+  // ---- floating petals ----
+  const petalColors = ['#F3D6DE','#E4D9F0','#DCEFE3','#D98FA3'];
+  const petalsContainer = document.body;
+  for(let i=0; i<14; i++){
+    const p = document.createElement('div');
+    p.className = 'petal';
+    p.style.left = Math.random()*100 + 'vw';
+    p.style.animationDuration = (10 + Math.random()*10) + 's';
+    p.style.animationDelay = (Math.random()*10) + 's';
+    const size = 10 + Math.random()*10;
+    const color = petalColors[i % petalColors.length];
+    p.innerHTML = `<svg width="${size}" height="${size}" viewBox="0 0 20 20"><path d="M10 0 C15 5, 15 15, 10 20 C5 15, 5 5, 10 0 Z" fill="${color}"/></svg>`;
+    petalsContainer.appendChild(p);
   }
 
-  let t = 0;
-  let scrollOffset = 0;
+  // ---- "No" button dodge logic ----
+  const noBtn = document.getElementById('noBtn');
+  const buttonsBox = document.querySelector('.buttons');
+  let dodgeCount = 0;
+  const noTexts = ['No', '¿Segura?', 'Piénsalo bien', 'Última oportunidad', 'En serio...'];
 
-  function drawGroup(stars, parallax){
-    stars.forEach(s => {
-      const twinkle = Math.sin(t * s.speed + s.phase) * 0.35 + 0.65;
-      const y = (s.y + scrollOffset * parallax) % canvas.height;
-      ctx.beginPath();
-      ctx.arc(s.x, y, s.r, 0, Math.PI*2);
-      ctx.fillStyle = `rgba(244, 213, 141, ${s.baseAlpha * twinkle})`;
-      ctx.fill();
-    });
+  function dodge(){
+    dodgeCount++;
+    const box = buttonsBox.getBoundingClientRect();
+    const maxX = box.width - 90;
+    const maxY = 20;
+    const randX = (Math.random()*2 - 1) * maxX * 0.5;
+    const randY = (Math.random()*2 - 1) * maxY;
+    noBtn.style.position = 'relative';
+    noBtn.style.left = randX + 'px';
+    noBtn.style.top = randY + 'px';
+    noBtn.textContent = noTexts[Math.min(dodgeCount, noTexts.length-1)];
   }
 
-  function draw(){
-    t += 1;
-    ctx.clearRect(0,0,canvas.width, canvas.height);
-    drawGroup(starsFar, 0.02);
-    drawGroup(starsNear, 0.05);
-    requestAnimationFrame(draw);
+  function sayYes(){
+    document.getElementById('stage1').classList.remove('active');
+    document.getElementById('stage2').classList.add('active');
   }
-
-  window.addEventListener('resize', resize);
-  window.addEventListener('scroll', () => { scrollOffset = window.scrollY; });
-  resize();
-  draw();
-
-  // Shooting star, occasional
-  function shootingStar(){
-    const el = document.createElement('div');
-    const startX = Math.random() * window.innerWidth * 0.6;
-    const startY = Math.random() * window.innerHeight * 0.3;
-    el.style.cssText = `
-      position: fixed; top:${startY}px; left:${startX}px;
-      width: 2px; height: 2px; background: #fff; border-radius: 50%;
-      box-shadow: 0 0 6px 1px #fff, 0 0 20px 4px rgba(244,213,141,0.6);
-      z-index: 1; pointer-events: none;
-    `;
-    document.body.appendChild(el);
-    el.animate([
-      { transform: 'translate(0,0)', opacity: 1 },
-      { transform: 'translate(280px, 190px)', opacity: 0 }
-    ], { duration: 1200, easing: 'ease-out' });
-    setTimeout(() => el.remove(), 1300);
-  }
-  setTimeout(shootingStar, 2200);
-  setInterval(shootingStar, 8000);
-
-  // Constellation draw-in on scroll
-  const heartObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        document.getElementById('heart-path').classList.add('drawn');
-        document.querySelectorAll('.constellation-wrap circle').forEach((c, i) => {
-          setTimeout(() => c.classList.add('lit'), 400 + i * 180);
-        });
-        setTimeout(() => document.getElementById('constellation-caption').classList.add('shown'), 2600);
-        heartObserver.disconnect();
-      }
-    });
-  }, { threshold: 0.4 });
-  heartObserver.observe(document.querySelector('.constellation-wrap'));
-
-  // Letter and music card reveal on scroll
-  const reveals = document.querySelectorAll('.letter, .music-card');
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        entry.target.classList.add('revealed');
-        revealObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.3 });
-  reveals.forEach(l => revealObserver.observe(l));
-
-  // ---------- Música de fondo (oculta) ----------
-  // TRACK_URI: reemplaza esto con el link de Spotify de "Visita" de Enjambre
-  // (Spotify app -> la canción -> Compartir -> Copiar link de la canción)
-  const TRACK_URI = "REPLACE_WITH_SPOTIFY_LINK";
-
-  let spotifyController = null;
-
-  window.onSpotifyIframeApiReady = (IFrameAPI) => {
-    const element = document.getElementById('music-embed');
-    const options = {
-      uri: TRACK_URI,
-      width: '1',
-      height: '1'
-    };
-    IFrameAPI.createController(element, options, (controller) => {
-      spotifyController = controller;
-    });
-  };
-
-  (function loadSpotifyApi(){
-    const tag = document.createElement('script');
-    tag.src = 'https://open.spotify.com/embed/iframe-api/v1';
-    tag.async = true;
-    document.body.appendChild(tag);
-  })();
-
-  const playBtn = document.getElementById('play-btn');
-  const musicCard = document.getElementById('music-card');
-  let isPlaying = false;
-
-  playBtn.addEventListener('click', () => {
-    if(!spotifyController) return;
-    if(isPlaying){
-      spotifyController.pause();
-      musicCard.classList.add('paused');
-      playBtn.textContent = '▶';
-    } else {
-      spotifyController.play();
-      musicCard.classList.remove('paused');
-      playBtn.textContent = '❚❚';
-    }
-    isPlaying = !isPlaying;
-  });
 </script>
 
 </body>
