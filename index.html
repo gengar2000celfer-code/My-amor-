@@ -186,9 +186,30 @@
   /* ---------- LETTER SECTIONS ---------- */
 
   .letter{
+    position: relative;
     max-width: 620px;
     margin: 0 auto;
     padding: 10vh 7vw;
+  }
+
+  .letter .floaty{
+    position: absolute;
+    color: var(--gold);
+    opacity: 0;
+    pointer-events: none;
+    animation: floatUp 6s ease-in infinite;
+  }
+
+  .letter .floaty.f1{ left: 6%; top: 78%; font-size: 0.7rem; animation-delay: 0s; }
+  .letter .floaty.f2{ left: 88%; top: 62%; font-size: 0.5rem; animation-delay: 2s; }
+  .letter .floaty.f3{ left: 14%; top: 20%; font-size: 0.55rem; animation-delay: 4s; }
+  .letter .floaty.f4{ left: 80%; top: 15%; font-size: 0.65rem; animation-delay: 1.3s; }
+
+  @keyframes floatUp{
+    0%{ opacity: 0; transform: translateY(0) scale(0.8); }
+    15%{ opacity: 0.8; }
+    85%{ opacity: 0.5; }
+    100%{ opacity: 0; transform: translateY(-60px) scale(1.1); }
   }
 
   .letter .mark{
@@ -246,79 +267,42 @@
     opacity: 0.5;
   }
 
-  /* ---------- MUSIC CARD ---------- */
+  /* ---------- BACKGROUND MUSIC (hidden) ---------- */
 
-  .music-card{
-    max-width: 420px;
-    margin: 4vh auto 10vh;
-    padding: 1.4em 1.6em;
-    border: 1px solid rgba(244,213,141,0.25);
-    border-radius: 14px;
-    background: rgba(255,255,255,0.03);
-    backdrop-filter: blur(6px);
-    display: flex;
-    align-items: center;
-    gap: 1em;
+  #music-embed{
+    position: fixed;
+    width: 1px;
+    height: 1px;
     opacity: 0;
-    transform: translateY(10px);
+    pointer-events: none;
+    overflow: hidden;
+    left: -9999px;
   }
 
-  .music-card.revealed{ animation: rise 1s ease forwards; }
-
-  .music-card .note{
-    flex: none;
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    background: var(--gold);
+  #enter-veil{
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    background: var(--night-1);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.2rem;
-    color: var(--night-1);
-    animation: bob 2.6s ease-in-out infinite;
+    cursor: pointer;
+    transition: opacity 0.8s ease;
   }
 
-  @keyframes bob{
-    0%,100%{ transform: translateY(0); }
-    50%{ transform: translateY(-4px); }
-  }
-
-  .music-card .info{ flex: 1; text-align: left; }
-
-  .music-card .info .song{
+  #enter-veil p{
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
-    font-size: 1.15rem;
-    color: var(--paper);
-  }
-
-  .music-card .info .artist{
-    font-size: 0.8rem;
-    color: var(--lavender);
-    opacity: 0.8;
-    margin-top: 0.15em;
-  }
-
-  .music-card a.play{
-    flex: none;
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    border: 1px solid var(--gold);
-    display: flex;
-    align-items: center;
-    justify-content: center;
     color: var(--gold);
-    text-decoration: none;
-    font-size: 0.9rem;
-    transition: background 0.25s ease, color 0.25s ease;
+    font-size: 1.1rem;
+    letter-spacing: 0.03em;
+    opacity: 0.85;
   }
 
-  .music-card a.play:hover,
-  .music-card a.play:focus-visible{
-    background: var(--gold);
-    color: var(--night-1);
+  #enter-veil.hidden{
+    opacity: 0;
+    pointer-events: none;
   }
 
   /* ---------- CLOSING ---------- */
@@ -382,6 +366,10 @@
   </div>
 
   <section class="letter" id="letter-1">
+    <span class="floaty f1">✦</span>
+    <span class="floaty f2">✧</span>
+    <span class="floaty f3">✦</span>
+    <span class="floaty f4">✧</span>
     <div class="mark"><span class="spark">✦</span>hermosa<span class="spark d2">✦</span></div>
     <p class="body-text">Sé que la tarea no te dio ni un respiro y que casi no pudimos hablar, pero eso no cambia nada de lo que siento. Aunque el día se llene de pendientes y los mensajes tarden en llegar, sigues siendo lo primero en lo que pienso al despertar y lo último antes de dormir. No necesito que hablemos todo el día para saber que te amo, lo sé aunque pasen las horas en silencio. Descansa, mi amor, mañana lo seguimos platicando con calma.</p>
   </section>
@@ -389,24 +377,25 @@
   <div class="divider"></div>
 
   <section class="letter" id="letter-2">
+    <span class="floaty f1">✧</span>
+    <span class="floaty f2">✦</span>
+    <span class="floaty f3">✧</span>
+    <span class="floaty f4">✦</span>
     <div class="mark"><span class="spark">✦</span>linda<span class="spark d2">✦</span></div>
     <p class="body-text">Cuando te digo que te duermas temprano no es porque no quiera hablarte, todo lo contrario. La verdad es que yo sufro más que tú al no poder hablarte, aguanto mil dagas enterradas en el corazón con tal de dejarte descansar. Pero te lo pido porque te quiero bien, porque mereces dormir tus horas y cuidarte, tanto en lo que comes como en lo que descansas. Prefiero mil veces sentir yo esa espinita de no hablarte, a que tú sacrifiques tu salud por quedarte platicando conmigo.</p>
   </section>
 
-  <div class="music-card" id="music-card">
-    <div class="note">♪</div>
-    <div class="info">
-      <div class="song">Manía Cardiaca</div>
-      <div class="artist">Enjambre</div>
-    </div>
-    <a class="play" href="https://open.spotify.com/search/Man%C3%ADa%20Cardiaca%20Enjambre" target="_blank" rel="noopener" aria-label="Escuchar en Spotify">▶</a>
-  </div>
+  <div id="music-embed"></div>
 
   <section class="closing">
     <p class="signature">te amo, hoy y todas las noches</p>
     <p class="date">tu Fermin ✦</p>
   </section>
 
+</div>
+
+<div id="enter-veil">
+  <p>toca para entrar ✦</p>
 </div>
 
 <script>
@@ -503,8 +492,8 @@
   }, { threshold: 0.4 });
   heartObserver.observe(document.querySelector('.constellation-wrap'));
 
-  // Letter and music card reveal on scroll
-  const reveals = document.querySelectorAll('.letter, .music-card');
+  // Letter reveal on scroll
+  const reveals = document.querySelectorAll('.letter');
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if(entry.isIntersecting){
@@ -514,8 +503,41 @@
     });
   }, { threshold: 0.3 });
   reveals.forEach(l => revealObserver.observe(l));
+
+  // ---------- Música de fondo (oculta) ----------
+  // TRACK_URI: reemplaza esto con el link de Spotify de "Visita" de Enjambre
+  // (Spotify app -> la canción -> Compartir -> Copiar link de la canción)
+  const TRACK_URI = "REPLACE_WITH_SPOTIFY_LINK";
+
+  let spotifyController = null;
+
+  window.onSpotifyIframeApiReady = (IFrameAPI) => {
+    const element = document.getElementById('music-embed');
+    const options = {
+      uri: TRACK_URI,
+      width: '1',
+      height: '1'
+    };
+    IFrameAPI.createController(element, options, (controller) => {
+      spotifyController = controller;
+    });
+  };
+
+  (function loadSpotifyApi(){
+    const tag = document.createElement('script');
+    tag.src = 'https://open.spotify.com/embed/iframe-api/v1';
+    tag.async = true;
+    document.body.appendChild(tag);
+  })();
+
+  const veil = document.getElementById('enter-veil');
+  veil.addEventListener('click', () => {
+    veil.classList.add('hidden');
+    if(spotifyController){
+      spotifyController.play();
+    }
+  }, { once: true });
 </script>
 
 </body>
 </html>
-
