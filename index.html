@@ -3,262 +3,308 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Buenos días, hermosa</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<title>Para que sepas cuanto te amo bb</title>
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Quicksand:wght@400;500;600;700&display=swap');
+
   :root{
-    --cream:#FBF6EE;
-    --paper:#FFFDF9;
-    --peach:#F5C6A5;
-    --rose:#E6A0A0;
-    --sage:#A9C3A2;
-    --brown:#5C4A3D;
-    --washi-yellow:#F3D77D;
-    --washi-blue:#BFD7E8;
-    --sun:#F4A259;
+    --paper: #FBF3E6;
+    --paper-dark: #F1E4D0;
+    --ink: #4A382E;
+    --rose: #D9637A;
+    --rose-deep: #B84A61;
+    --gold: #EEB84E;
+    --cork: #C8A27A;
+    --tape: #F4DCC7;
   }
-  *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;}
-  body{
-    background:
-      radial-gradient(circle at 20% 10%, #fff7e8 0%, transparent 40%),
-      linear-gradient(180deg,#FDF3E3 0%, var(--cream) 30%, var(--cream) 100%);
-    font-family:'Nunito', sans-serif;
-    color:var(--brown);
-    overflow-x:hidden;
+
+  *{ box-sizing: border-box; }
+
+  html, body{
+    margin:0;
+    padding:0;
     min-height:100vh;
+    background:
+      radial-gradient(circle at 20% 10%, rgba(216,164,120,0.15), transparent 40%),
+      radial-gradient(circle at 85% 80%, rgba(216,164,120,0.12), transparent 45%),
+      var(--paper);
+    font-family: 'Quicksand', sans-serif;
+    color: var(--ink);
+    overflow-x: hidden;
   }
 
-  .sunrise{
-    position:relative;
-    height:220px;
-    overflow:hidden;
-    background:linear-gradient(180deg,#FFE3B3 0%, #FDF3E3 100%);
-  }
-  .sun{
-    position:absolute;
-    left:50%;
-    width:120px;height:120px;
-    margin-left:-60px;
-    border-radius:50%;
-    background:radial-gradient(circle at 35% 30%, #FFE8B0, var(--sun) 70%);
-    box-shadow:0 0 60px 20px rgba(244,162,89,0.35);
-    animation: rise 2.2s ease-out forwards;
-    top:220px;
-  }
-  @keyframes rise{
-    to{ top:60px; }
-  }
-  .sunrise::after{
-    content:"";
-    position:absolute;
-    bottom:0;left:0;right:0;
-    height:40px;
-    background:linear-gradient(180deg, transparent, var(--cream));
-  }
-
-  h1.title{
-    text-align:center;
-    font-family:'Caveat', cursive;
-    font-weight:700;
-    font-size:3.2rem;
-    margin:-30px 0 4px;
-    color:var(--brown);
-    position:relative;
-    z-index:2;
-  }
-  p.subtitle{
-    text-align:center;
-    font-size:1.05rem;
-    color:#8a7566;
-    margin:0 0 40px;
-    font-style:italic;
-  }
-
-  .board{
-    max-width:640px;
-    margin:0 auto;
-    padding:10px 20px 60px;
+  .stage{
+    min-height: 100vh;
     display:flex;
-    flex-direction:column;
-    gap:34px;
+    align-items:center;
+    justify-content:center;
+    padding: 32px 20px;
   }
 
-  .note{
-    background:var(--paper);
-    padding:22px 24px;
-    border-radius:2px;
-    box-shadow:0 6px 16px rgba(92,74,61,0.12);
-    position:relative;
+  .card{
+    position: relative;
+    width: 100%;
+    max-width: 380px;
+    background: var(--paper-dark);
+    border-radius: 6px;
+    padding: 44px 28px 36px;
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.6) inset,
+      0 18px 30px -18px rgba(74,56,46,0.35);
+    text-align: center;
   }
-  .note:nth-child(odd){ transform:rotate(-1.4deg); }
-  .note:nth-child(even){ transform:rotate(1.6deg); }
 
   .tape{
     position:absolute;
-    top:-14px;
-    height:28px;
-    width:70px;
-    opacity:0.85;
+    width: 86px;
+    height: 30px;
+    background: var(--tape);
+    opacity: 0.85;
+    box-shadow: 0 2px 4px rgba(74,56,46,0.15);
   }
-  .tape.yellow{ background:var(--washi-yellow); left:50%; margin-left:-35px; transform:rotate(-3deg); }
-  .tape.blue{ background:var(--washi-blue); }
-  .tape.rose{ background:var(--rose); }
+  .tape.tl{ top:-14px; left:-18px; transform: rotate(-10deg); }
+  .tape.tr{ top:-14px; right:-18px; transform: rotate(9deg); }
 
-  .note h2{
+  .eyebrow-note{
     font-family:'Caveat', cursive;
-    font-size:1.9rem;
-    margin:6px 0 8px;
-    color:var(--brown);
+    font-size: 1.35rem;
+    color: var(--rose-deep);
+    margin: 0 0 6px;
   }
-  .note p{
-    margin:0;
-    line-height:1.6;
-    font-size:1rem;
-    color:#5c4a3d;
+
+  h1{
+    font-family:'Caveat', cursive;
+    font-size: 2.5rem;
+    line-height: 1.15;
+    margin: 0 0 22px;
+    color: var(--ink);
   }
 
   .counter-wrap{
-    text-align:center;
-    padding:20px 10px 6px;
+    margin: 6px 0 18px;
   }
-  .counter-wrap p.lead{
-    font-size:1rem;
-    margin-bottom:6px;
-    color:#8a7566;
-  }
+
   .counter{
-    font-family:'Caveat', cursive;
-    font-weight:700;
-    font-size:3.6rem;
-    color:var(--rose);
-    letter-spacing:1px;
-  }
-  .counter-wrap p.trail{
-    font-size:1.05rem;
-    margin-top:4px;
-    color:var(--brown);
+    font-family:'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 3.4rem;
+    color: var(--rose-deep);
+    line-height: 1;
+    transition: transform 0.15s ease;
   }
 
-  .reveal-note{
-    background:var(--peach);
-    text-align:center;
-    cursor:pointer;
-    user-select:none;
-    transition:transform 0.15s ease;
+  .counter.infinite{
+    font-size: 4.2rem;
+    color: var(--gold);
+    text-shadow: 0 0 18px rgba(238,184,78,0.5);
   }
-  .reveal-note:active{ transform:scale(0.98) rotate(0deg); }
-  .reveal-note h2{ margin-bottom:2px; }
-  .reveal-note .hint{
-    font-size:0.85rem;
-    color:#7a5c46;
-    font-style:italic;
+
+  .counter-label{
+    font-size: 0.95rem;
+    color: var(--ink);
+    opacity: 0.75;
+    margin-top: 4px;
+    min-height: 1.4em;
   }
-  .reveal-note .hidden-msg{
+
+  .heart-btn{
+    appearance: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+    width: 120px;
+    height: 120px;
+    margin: 6px auto 18px;
+    display: block;
+    padding: 0;
+    transition: transform 0.08s ease;
+  }
+  .heart-btn:active{ transform: scale(0.9); }
+  .heart-btn svg{ width: 100%; height: 100%; }
+  .heart-btn:focus-visible{ outline: 3px solid var(--rose); outline-offset: 4px; border-radius: 50%; }
+
+  .heart-path{
+    fill: var(--rose);
+    transition: fill 0.4s ease;
+  }
+  .heart-btn.gold .heart-path{ fill: var(--gold); }
+
+  .hint{
+    font-size: 0.85rem;
+    color: var(--ink);
+    opacity: 0.55;
+    margin-top: -8px;
+  }
+
+  .reveal{
+    margin-top: 22px;
+    font-family:'Caveat', cursive;
+    font-size: 1.7rem;
+    line-height: 1.35;
+    color: var(--rose-deep);
+    min-height: 1.4em;
+  }
+
+  .final-msg{
     display:none;
-    margin-top:10px;
-    font-size:1rem;
-    line-height:1.6;
+    margin-top: 8px;
   }
-  .reveal-note.open .hidden-msg{ display:block; }
-  .reveal-note.open .hint{ display:none; }
+  .final-msg.show{ display:block; animation: fade-in 0.9s ease forwards; }
 
-  footer{
-    text-align:center;
-    padding:10px 20px 50px;
+  .final-msg p{
     font-family:'Caveat', cursive;
-    font-size:1.5rem;
-    color:#a08770;
+    font-size: 1.9rem;
+    line-height: 1.3;
+    margin: 4px 0;
+    color: var(--ink);
+  }
+  .final-msg .signature{
+    margin-top: 14px;
+    font-size: 1.4rem;
+    color: var(--rose-deep);
+  }
+
+  @keyframes fade-in{
+    from{ opacity:0; transform: translateY(8px); }
+    to{ opacity:1; transform: translateY(0); }
+  }
+
+  .floating-heart{
+    position: fixed;
+    pointer-events: none;
+    font-size: 1.4rem;
+    color: var(--rose);
+    animation: float-up 1.3s ease-out forwards;
+    z-index: 5;
+  }
+  @keyframes float-up{
+    0%{ opacity: 0.9; transform: translateY(0) scale(0.8) rotate(0deg); }
+    100%{ opacity: 0; transform: translateY(-140px) scale(1.1) rotate(20deg); }
   }
 
   @media (prefers-reduced-motion: reduce){
-    .sun{ animation:none; top:60px; }
+    .heart-btn, .floating-heart, .final-msg.show{ animation: none !important; transition: none !important; }
   }
 </style>
 </head>
 <body>
 
-  <div class="sunrise"><div class="sun"></div></div>
-  <h1 class="title">Buenos días, mi cielo</h1>
-  <p class="subtitle">todavía es de mañana y ya eres lo mejor del día</p>
+<div class="stage">
+  <div class="card">
+    <div class="tape tl"></div>
+    <div class="tape tr"></div>
 
-  <div class="board">
-
-    <div class="note">
-      <div class="tape yellow"></div>
-      <h2>El sol tuvo que esforzarse hoy</h2>
-      <p>Porque va a salir a competir contra ti por quién ilumina más la mañana, y va a perder. Abriste los ojos y ya cambiaste el clima de mi día entero.</p>
-    </div>
-
-    <div class="note">
-      <div class="tape blue" style="left:20px;"></div>
-      <h2>Ese pelo despeinado de recién levantada</h2>
-      <p>Es literalmente mi imagen favorita del mundo. Nadie más la ve, solo yo, y por eso la cuido como un secreto.</p>
-    </div>
+    <p class="eyebrow-note">Mi mujer hermosa ❤️❤️</p>
+    <h1>¿Cuánto te amo?</h1>
 
     <div class="counter-wrap">
-      <p class="lead">Conté las razones por las que eres hermosa por la mañana.</p>
-      <div class="counter" id="counterNum">0</div>
-      <p class="trail">...y me quedé sin números antes de quedarme sin razones.</p>
+      <div class="counter" id="counter">0</div>
+      <div class="counter-label" id="counterLabel">toca el corazón y descúbrelo</div>
     </div>
 
-    <div class="note">
-      <div class="tape rose" style="right:24px;"></div>
-      <h2>Tu voz apenas despertando</h2>
-      <p>Ronca, lenta, todavía medio dormida... es mi sonido favorito para empezar cualquier día, mejor que cualquier alarma.</p>
-    </div>
+    <button class="heart-btn" id="heartBtn" aria-label="Presiona el corazón">
+      <svg viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg">
+        <path class="heart-path" d="M50 88 C 20 65, 2 45, 2 26 C 2 10, 15 0, 30 0 C 40 0, 47 6, 50 12 C 53 6, 60 0, 70 0 C 85 0, 98 10, 98 26 C 98 45, 80 65, 50 88 Z"/>
+      </svg>
+    </button>
 
-    <div class="note">
-      <div class="tape yellow" style="left:30px; margin-left:0;"></div>
-      <h2>Ese café que te tomas mirando a ningún lado</h2>
-      <p>Con los ojos entrecerrados, todavía volviendo al mundo... y aún así, sin esforzarte, sigues siendo lo más bonito en la habitación.</p>
-    </div>
+    <p class="hint" id="hint">sigue tocando…</p>
 
-    <div class="note reveal-note" id="revealNote">
-      <div class="tape blue"></div>
-      <h2>Toca aquí ☀️</h2>
-      <p class="hint">(hay algo escondido debajo)</p>
-      <p class="hidden-msg">Buenos días, hermosa. Que tu día sea tan bonito como tú lo eres apenas despertando, sin filtros, sin arreglarte, solo tú. Te quiero desde que abriste los ojos.</p>
-    </div>
+    <div class="reveal" id="reveal"></div>
 
+    <div class="final-msg" id="finalMsg">
+      <p>Porque no importa cuánto cuente,</p>
+      <p>nunca voy a llegar al final.</p>
+      <p class="signature">mi amor por ti es infinito 🩷</p>
+    </div>
   </div>
-
-  <footer>que tengas el mejor de los días 🌻</footer>
+</div>
 
 <script>
-  const counterEl = document.getElementById('counterNum');
-  let target = 1000000;
-  let current = 0;
-  let start = null;
-  const duration = 1800;
+  const counterEl = document.getElementById('counter');
+  const counterLabel = document.getElementById('counterLabel');
+  const heartBtn = document.getElementById('heartBtn');
+  const hint = document.getElementById('hint');
+  const reveal = document.getElementById('reveal');
+  const finalMsg = document.getElementById('finalMsg');
 
-  function easeOutQuad(t){ return t*(2-t); }
+  let count = 0;
+  let finished = false;
 
-  function step(timestamp){
-    if(!start) start = timestamp;
-    const progress = Math.min((timestamp - start) / duration, 1);
-    current = Math.floor(easeOutQuad(progress) * target);
-    counterEl.textContent = current.toLocaleString('es-MX');
-    if(progress < 1){
-      requestAnimationFrame(step);
-    } else {
-      counterEl.textContent = target.toLocaleString('es-MX');
+  const milestones = [
+    { at: 8,  text: "más… y más…" },
+    { at: 18, text: "sigo sin poder parar de contar" },
+    { at: 30, text: "y ya perdí la cuenta hace rato" },
+    { at: 42, text: "esto ya no tiene número exacto" },
+  ];
+
+  const THRESHOLD = 55;
+
+  function spawnFloatingHeart(x, y){
+    const h = document.createElement('div');
+    h.className = 'floating-heart';
+    h.textContent = '🩷';
+    h.style.left = x + 'px';
+    h.style.top = y + 'px';
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 1300);
+  }
+
+  function pulseButton(){
+    heartBtn.style.transform = 'scale(1.12)';
+    setTimeout(() => { heartBtn.style.transform = 'scale(1)'; }, 90);
+  }
+
+  function finish(){
+    finished = true;
+    counterEl.textContent = '∞';
+    counterEl.classList.add('infinite');
+    counterLabel.textContent = 'así de simple';
+    heartBtn.classList.add('gold');
+    hint.style.display = 'none';
+    reveal.textContent = '';
+    finalMsg.classList.add('show');
+
+    for (let i = 0; i < 14; i++){
+      setTimeout(() => {
+        const x = Math.random() * window.innerWidth;
+        const y = window.innerHeight * 0.6 + Math.random() * 80;
+        spawnFloatingHeart(x, y);
+      }, i * 90);
     }
   }
 
-  const observer = new IntersectionObserver((entries)=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting){
-        requestAnimationFrame(step);
-        observer.disconnect();
-      }
-    });
-  }, {threshold:0.5});
-  observer.observe(counterEl);
+  heartBtn.addEventListener('click', (e) => {
+    if (finished){
+      const rect = heartBtn.getBoundingClientRect();
+      spawnFloatingHeart(rect.left + rect.width/2, rect.top);
+      return;
+    }
 
-  document.getElementById('revealNote').addEventListener('click', function(){
-    this.classList.toggle('open');
+    count++;
+    counterEl.textContent = count;
+    pulseButton();
+
+    const rect = heartBtn.getBoundingClientRect();
+    spawnFloatingHeart(
+      rect.left + rect.width/2 + (Math.random()*40 - 20),
+      rect.top + rect.height/2
+    );
+
+    const m = milestones.find(m => m.at === count);
+    if (m){
+      reveal.textContent = m.text;
+    }
+
+    if (count === 1){
+      counterLabel.textContent = 'vez que pienso en ti hoy';
+    } else if (count < THRESHOLD){
+      counterLabel.textContent = 'veces que pienso en ti hoy';
+    }
+
+    if (count >= THRESHOLD){
+      finish();
+    }
   });
 </script>
 
