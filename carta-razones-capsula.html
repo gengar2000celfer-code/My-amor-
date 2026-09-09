@@ -9,87 +9,102 @@
 <style>
   :root {
     --pink: #f7c8d9;
-    --pink-dark: #e89ab5;
-    --cream: #fdf6ee;
-    --cork: #d7b98e;
-    --washi1: #f4a6a6;
+    --pink-dark: #d4527e;
+    --cream: #fffaf3;
+    --peach1: #fdeee0;
+    --peach2: #fde3d0;
+    --washi1: #f6c65c;
     --washi2: #a6c8f4;
-    --washi3: #c8f4a6;
+    --washi3: #f2b6c0;
     --ink: #5a4a42;
   }
   * { box-sizing: border-box; }
   body {
     margin: 0;
     font-family: 'Quicksand', sans-serif;
-    background: linear-gradient(160deg, var(--cork) 0%, #c9a876 100%);
-    background-image:
-      radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px);
-    background-size: 12px 12px, cover;
+    background: linear-gradient(180deg, var(--peach1) 0%, var(--peach2) 100%);
     color: var(--ink);
     min-height: 100vh;
-    padding: 24px 14px 60px;
+    padding: 30px 14px 60px;
   }
   .wrap { max-width: 480px; margin: 0 auto; }
 
-  /* Título estilo polaroid con washi tape */
+  /* Título con washi tape a los lados, como el resto de las páginas */
   .title-card {
-    background: #fff;
-    padding: 22px 18px 28px;
-    border-radius: 4px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-    text-align: center;
     position: relative;
-    margin-bottom: 36px;
-    transform: rotate(-1.5deg);
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 10px 12px 0;
   }
-  .title-card::before {
+  .title-card::before, .title-card::after {
     content: "";
     position: absolute;
-    top: -14px; left: 50%;
-    transform: translateX(-50%) rotate(-4deg);
-    width: 90px; height: 26px;
-    background: var(--washi1);
-    opacity: 0.85;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    top: -6px;
+    width: 70px; height: 22px;
+    background: var(--washi3);
+    opacity: 0.8;
+  }
+  .title-card::before { left: 4px; transform: rotate(-8deg); }
+  .title-card::after { right: 4px; transform: rotate(8deg); }
+  .title-card .eyebrow {
+    font-family: 'Caveat', cursive;
+    font-size: 1.2em;
+    color: var(--pink-dark);
+    display: block;
   }
   .title-card h1 {
     font-family: 'Caveat', cursive;
-    font-size: 2.4em;
-    margin: 6px 0 0;
-    color: var(--pink-dark);
+    font-weight: 700;
+    font-size: 2.9em;
+    margin: 2px 0 0;
+    color: #4a3a32;
+    line-height: 1.05;
   }
-  .title-card p { margin: 4px 0 0; font-size: 0.9em; color: #999; }
+  .title-card p { margin: 6px 0 0; font-size: 0.95em; color: #8a7a70; font-style: italic; }
 
   section {
     background: var(--cream);
-    border-radius: 14px;
-    padding: 22px 18px;
-    margin-bottom: 28px;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+    border-radius: 4px;
+    padding: 26px 20px 22px;
+    margin-bottom: 40px;
+    box-shadow: 0 10px 22px rgba(90,74,66,0.16);
     position: relative;
+  }
+  section:nth-of-type(1) { transform: rotate(-0.6deg); }
+  section:nth-of-type(2) { transform: rotate(0.5deg); }
+  section::before {
+    content: "";
+    position: absolute;
+    top: -12px; left: 50%;
+    transform: translateX(-50%) rotate(-3deg);
+    width: 80px; height: 24px;
+    background: var(--washi1);
+    opacity: 0.85;
   }
   section h2 {
     font-family: 'Caveat', cursive;
-    font-size: 1.9em;
+    font-weight: 700;
+    font-size: 2.1em;
     color: var(--pink-dark);
-    margin-top: 0;
+    margin-top: 4px;
     text-align: center;
   }
 
   /* Razones infinitas */
   #razon-box {
-    background: #fff;
-    border-radius: 10px;
-    padding: 20px;
-    min-height: 90px;
+    background: #fffdf9;
+    border-radius: 6px;
+    padding: 22px;
+    min-height: 100px;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     font-family: 'Caveat', cursive;
-    font-size: 1.5em;
+    font-weight: 700;
+    font-size: 1.6em;
     color: var(--ink);
-    border: 2px dashed var(--pink);
+    box-shadow: inset 0 0 0 1.5px var(--pink);
     margin-bottom: 14px;
   }
   button {
@@ -172,17 +187,29 @@
   #modal-overlay.open { display: flex; }
   #modal-box {
     background: var(--cream);
-    border-radius: 12px;
-    padding: 26px 22px;
-    max-width: 360px;
+    border-radius: 6px;
+    padding: 28px 22px;
+    max-width: 340px;
     text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+    box-shadow: 0 12px 34px rgba(0,0,0,0.4);
+    position: relative;
+  }
+  #modal-box::before {
+    content: "";
+    position: absolute;
+    top: -12px; left: 50%;
+    transform: translateX(-50%) rotate(-3deg);
+    width: 70px; height: 20px;
+    background: var(--washi2);
+    opacity: 0.85;
   }
   #modal-box h3 {
     font-family: 'Caveat', cursive;
-    font-size: 1.7em;
+    font-weight: 700;
+    font-style: italic;
+    font-size: 1.8em;
     color: var(--pink-dark);
-    margin-top: 0;
+    margin-top: 6px;
   }
   #modal-box p { font-size: 1em; line-height: 1.5; white-space: pre-wrap; }
   #modal-box img { max-width: 100%; border-radius: 8px; margin-top: 10px; }
@@ -198,7 +225,8 @@
 <div class="wrap">
 
   <div class="title-card">
-    <h1>Para ti, Yamileth</h1>
+    <span class="eyebrow">para mi mujer</span>
+    <h1>Yamileth</h1>
     <p>un rinconcito que crece con el tiempo</p>
   </div>
 
