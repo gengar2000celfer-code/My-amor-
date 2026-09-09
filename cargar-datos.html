@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cargar datos — solo una vez</title>
+<style>
+  body {
+    font-family: sans-serif;
+    background: #fdf6ee;
+    color: #5a4a42;
+    text-align: center;
+    padding: 40px 20px;
+  }
+  button {
+    background: #e89ab5;
+    color: #fff;
+    border: none;
+    padding: 16px 26px;
+    border-radius: 30px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  #log {
+    margin-top: 24px;
+    text-align: left;
+    background: #fff;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 0.85em;
+    max-height: 300px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+  }
+</style>
+</head>
+<body>
+<h2>⚠️ Botón de un solo uso</h2>
+<p>Esto sube 20 razones y 1 carta de cápsula a Firestore.<br>Tócalo UNA sola vez para no duplicar datos.</p>
+<button id="btn">Cargar contenido a Firestore</button>
+<div id="log"></div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+  import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyC05JhJVgyR9YsH-ciMDEy-XohRuw_ehSQ",
+    authDomain: "my-love-b3e12.firebaseapp.com",
+    projectId: "my-love-b3e12",
+    storageBucket: "my-love-b3e12.firebasestorage.app",
+    messagingSenderId: "587338174796",
+    appId: "1:587338174796:web:bd64ffc9945c733f3b7fe9"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  const razones = [
+    "porque eres tierna y chistosa al mismo tiempo, y nunca sé cuál de las dos me va a tocar",
+    "porque cuando te enojas no finges nada, dices exactamente lo que sientes, y eso me encanta",
+    "porque tu risa me distrae hasta de mi propia frase a medias",
+    "porque tu voz es de las cosas que más se me quedan grabadas del día",
+    "porque eres sincera incluso cuando sería más fácil no decir nada",
+    "porque puedes pasar de tierna a chistosa en la misma oración",
+    "porque me acuerdo perfecto del 24 de agosto, 7:15 pm, como si tuviera timestamp en la cabeza",
+    "porque tu forma de enojarte, tan directa, me da más confianza que mil personas que no dicen nada",
+    "porque me haces reír sin intentarlo",
+    "porque eres de las pocas personas que no fingen ternura, la tuya es real",
+    "porque tu voz cambia cuando estás emocionada y se nota al instante",
+    "porque discutir contigo se siente más honesto que estar de acuerdo con otras personas",
+    "porque tienes ese equilibrio raro de ser dulce y también un poquito intensa, y me gusta ese combo",
+    "porque cuando te ríes fuerte se me olvida lo que estaba pensando",
+    "porque no te guardas nada, ni lo bueno ni lo que te molesta",
+    "porque llevamos menos de 6 meses y ya siento que conozco tu forma de ser mejor que la de gente que llevo años conociendo",
+    "porque tu ternura no es de las que se apagan cuando nadie ve",
+    "porque cuando te enojas sigues siendo justa, no cruel",
+    "porque tu voz es de las primeras cosas que noté de ti",
+    "porque simplemente eres tú, sin filtro, y eso es lo que más quiero"
+  ];
+
+  const capsulas = [
+    {
+      fecha: "2026-09-24",
+      mensaje: "Hoy se cumple un mes desde el 24 de agosto a las 7:15 pm, cuando te conocí.\n\nUn mes no es mucho tiempo, pero contigo se ha sentido de esos que valen por varios. Ya quiero que sepas que tu forma de ser -tierna, chistosa, sincera hasta cuando te enojas- se volvió rápido una de mis cosas favoritas del día a día.\n\nGracias por estos primeros 30 días. Vienen muchos más."
+    }
+  ];
+
+  document.getElementById("btn").addEventListener("click", async () => {
+    const log = document.getElementById("log");
+    log.textContent = "Subiendo...\n";
+    document.getElementById("btn").disabled = true;
+
+    try {
+      for (const texto of razones) {
+        await addDoc(collection(db, "razones"), { texto });
+        log.textContent += `✔ razón subida\n`;
+      }
+      for (const capsula of capsulas) {
+        await addDoc(collection(db, "capsulas"), capsula);
+        log.textContent += `✔ cápsula ${capsula.fecha} subida\n`;
+      }
+      log.textContent += "\n✅ Listo. Ya puedes borrar este archivo del repo si quieres.";
+    } catch (err) {
+      log.textContent += "\n❌ Error: " + err.message;
+    }
+  });
+</script>
+</body>
+</html>
