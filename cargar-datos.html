@@ -3,43 +3,80 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cargar datos — solo una vez</title>
+<title>Admin — cargar contenido</title>
 <style>
   body {
     font-family: sans-serif;
     background: #fdf6ee;
     color: #5a4a42;
-    text-align: center;
-    padding: 40px 20px;
+    padding: 20px 16px 60px;
+    max-width: 480px;
+    margin: 0 auto;
   }
+  h1 { font-size: 1.3em; text-align: center; }
+  section {
+    background: #fff;
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 24px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  }
+  h2 { font-size: 1.1em; margin-top: 0; color: #b5527e; }
+  textarea, input[type="date"] {
+    width: 100%;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: 0.95em;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin-bottom: 10px;
+  }
+  textarea { min-height: 140px; resize: vertical; }
   button {
     background: #e89ab5;
     color: #fff;
     border: none;
-    padding: 16px 26px;
-    border-radius: 30px;
-    font-size: 1.1em;
+    padding: 12px 18px;
+    border-radius: 24px;
+    font-size: 1em;
     font-weight: bold;
     cursor: pointer;
+    width: 100%;
   }
-  #log {
-    margin-top: 24px;
-    text-align: left;
-    background: #fff;
-    padding: 14px;
-    border-radius: 8px;
-    font-size: 0.85em;
-    max-height: 300px;
-    overflow-y: auto;
+  .hint { font-size: 0.8em; color: #999; margin-bottom: 10px; }
+  .log {
+    margin-top: 10px;
+    font-size: 0.8em;
+    background: #f6f0e8;
+    padding: 10px;
+    border-radius: 6px;
     white-space: pre-wrap;
+    max-height: 160px;
+    overflow-y: auto;
   }
 </style>
 </head>
 <body>
-<h2>⚠️ Botón de un solo uso</h2>
-<p>Esto sube 20 razones y 1 carta de cápsula a Firestore.<br>Tócalo UNA sola vez para no duplicar datos.</p>
-<button id="btn">Cargar contenido a Firestore</button>
-<div id="log"></div>
+<h1>Cargar contenido a Firestore</h1>
+
+<section>
+  <h2>Razones</h2>
+  <p class="hint">Cada caja es una razón completa (puede tener varios renglones). Toca + para agregar otra caja.</p>
+  <div id="razones-lista"></div>
+  <button id="btn-add-razon" style="background:#c8b8a8; margin-bottom:14px;">+ agregar otra caja</button>
+  <button id="btn-razones">Subir todas las razones</button>
+  <div class="log" id="log-razones"></div>
+</section>
+
+<section>
+  <h2>Carta / cápsula del tiempo</h2>
+  <p class="hint">Fecha en la que se puede abrir esta carta.</p>
+  <input type="date" id="capsula-fecha">
+  <textarea id="capsula-mensaje" placeholder="Escribe aquí la carta completa..."></textarea>
+  <button id="btn-capsula">Agregar esta carta</button>
+  <div class="log" id="log-capsula"></div>
+</section>
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
@@ -57,53 +94,83 @@
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
-  const razones = [
-    "porque eres tierna y chistosa al mismo tiempo, y nunca sé cuál de las dos me va a tocar",
-    "porque cuando te enojas no finges nada, dices exactamente lo que sientes, y eso me encanta",
-    "porque tu risa me distrae hasta de mi propia frase a medias",
-    "porque tu voz es de las cosas que más se me quedan grabadas del día",
-    "porque eres sincera incluso cuando sería más fácil no decir nada",
-    "porque puedes pasar de tierna a chistosa en la misma oración",
-    "porque me acuerdo perfecto del 24 de agosto, 7:15 pm, como si tuviera timestamp en la cabeza",
-    "porque tu forma de enojarte, tan directa, me da más confianza que mil personas que no dicen nada",
-    "porque me haces reír sin intentarlo",
-    "porque eres de las pocas personas que no fingen ternura, la tuya es real",
-    "porque tu voz cambia cuando estás emocionada y se nota al instante",
-    "porque discutir contigo se siente más honesto que estar de acuerdo con otras personas",
-    "porque tienes ese equilibrio raro de ser dulce y también un poquito intensa, y me gusta ese combo",
-    "porque cuando te ríes fuerte se me olvida lo que estaba pensando",
-    "porque no te guardas nada, ni lo bueno ni lo que te molesta",
-    "porque llevamos menos de 6 meses y ya siento que conozco tu forma de ser mejor que la de gente que llevo años conociendo",
-    "porque tu ternura no es de las que se apagan cuando nadie ve",
-    "porque cuando te enojas sigues siendo justa, no cruel",
-    "porque tu voz es de las primeras cosas que noté de ti",
-    "porque simplemente eres tú, sin filtro, y eso es lo que más quiero"
-  ];
+  function agregarCajaRazon() {
+    const lista = document.getElementById("razones-lista");
+    const wrap = document.createElement("div");
+    wrap.style.position = "relative";
+    wrap.style.marginBottom = "6px";
 
-  const capsulas = [
-    {
-      fecha: "2026-09-24",
-      mensaje: "Hoy se cumple un mes desde el 24 de agosto a las 7:15 pm, cuando te conocí.\n\nUn mes no es mucho tiempo, pero contigo se ha sentido de esos que valen por varios. Ya quiero que sepas que tu forma de ser -tierna, chistosa, sincera hasta cuando te enojas- se volvió rápido una de mis cosas favoritas del día a día.\n\nGracias por estos primeros 30 días. Vienen muchos más."
+    const ta = document.createElement("textarea");
+    ta.className = "razon-caja";
+    ta.placeholder = "Escribe aquí una razón completa...";
+    ta.style.minHeight = "90px";
+
+    const del = document.createElement("button");
+    del.textContent = "quitar esta caja";
+    del.style.background = "#eee";
+    del.style.color = "#a33";
+    del.style.fontSize = "0.8em";
+    del.style.padding = "6px 10px";
+    del.style.marginBottom = "12px";
+    del.addEventListener("click", () => wrap.remove());
+
+    wrap.appendChild(ta);
+    wrap.appendChild(del);
+    lista.appendChild(wrap);
+  }
+
+  document.getElementById("btn-add-razon").addEventListener("click", agregarCajaRazon);
+  agregarCajaRazon(); // arranca con una caja lista
+
+  document.getElementById("btn-razones").addEventListener("click", async () => {
+    const cajas = Array.from(document.querySelectorAll(".razon-caja"))
+      .map(t => t.value.trim())
+      .filter(t => t.length > 0);
+    const log = document.getElementById("log-razones");
+
+    if (cajas.length === 0) {
+      log.textContent = "Escribe al menos una razón primero.";
+      return;
     }
-  ];
 
-  document.getElementById("btn").addEventListener("click", async () => {
-    const log = document.getElementById("log");
-    log.textContent = "Subiendo...\n";
-    document.getElementById("btn").disabled = true;
-
-    try {
-      for (const texto of razones) {
+    log.textContent = `Subiendo ${cajas.length} razón(es)...\n`;
+    let ok = 0;
+    for (const texto of cajas) {
+      try {
         await addDoc(collection(db, "razones"), { texto });
-        log.textContent += `✔ razón subida\n`;
+        ok++;
+        log.textContent += `✔ subida (${ok}/${cajas.length})\n`;
+      } catch (err) {
+        log.textContent += `✖ error: ${err.message}\n`;
       }
-      for (const capsula of capsulas) {
-        await addDoc(collection(db, "capsulas"), capsula);
-        log.textContent += `✔ cápsula ${capsula.fecha} subida\n`;
-      }
-      log.textContent += "\n✅ Listo. Ya puedes borrar este archivo del repo si quieres.";
+    }
+    log.textContent += "\nListo.";
+    document.getElementById("razones-lista").innerHTML = "";
+    agregarCajaRazon();
+  });
+
+  document.getElementById("btn-capsula").addEventListener("click", async () => {
+    const fecha = document.getElementById("capsula-fecha").value;
+    const mensaje = document.getElementById("capsula-mensaje").value.trim();
+    const log = document.getElementById("log-capsula");
+
+    if (!fecha) {
+      log.textContent = "Elige una fecha primero.";
+      return;
+    }
+    if (!mensaje) {
+      log.textContent = "Escribe el mensaje de la carta primero.";
+      return;
+    }
+
+    log.textContent = "Subiendo carta...";
+    try {
+      await addDoc(collection(db, "capsulas"), { fecha, mensaje });
+      log.textContent = `✔ Carta para ${fecha} subida correctamente.`;
+      document.getElementById("capsula-mensaje").value = "";
+      document.getElementById("capsula-fecha").value = "";
     } catch (err) {
-      log.textContent += "\n❌ Error: " + err.message;
+      log.textContent = `✖ error: ${err.message}`;
     }
   });
 </script>
