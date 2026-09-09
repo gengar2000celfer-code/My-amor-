@@ -30,3 +30,352 @@
     padding: 24px 14px 60px;
   }
   .wrap { max-width: 480px; margin: 0 auto; }
+
+  /* Título estilo polaroid con washi tape */
+  .title-card {
+    background: #fff;
+    padding: 22px 18px 28px;
+    border-radius: 4px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    text-align: center;
+    position: relative;
+    margin-bottom: 36px;
+    transform: rotate(-1.5deg);
+  }
+  .title-card::before {
+    content: "";
+    position: absolute;
+    top: -14px; left: 50%;
+    transform: translateX(-50%) rotate(-4deg);
+    width: 90px; height: 26px;
+    background: var(--washi1);
+    opacity: 0.85;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+  }
+  .title-card h1 {
+    font-family: 'Caveat', cursive;
+    font-size: 2.4em;
+    margin: 6px 0 0;
+    color: var(--pink-dark);
+  }
+  .title-card p { margin: 4px 0 0; font-size: 0.9em; color: #999; }
+
+  section {
+    background: var(--cream);
+    border-radius: 14px;
+    padding: 22px 18px;
+    margin-bottom: 28px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+    position: relative;
+  }
+  section h2 {
+    font-family: 'Caveat', cursive;
+    font-size: 1.9em;
+    color: var(--pink-dark);
+    margin-top: 0;
+    text-align: center;
+  }
+
+  /* Razones infinitas */
+  #razon-box {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    min-height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: 'Caveat', cursive;
+    font-size: 1.5em;
+    color: var(--ink);
+    border: 2px dashed var(--pink);
+    margin-bottom: 14px;
+  }
+  button {
+    display: block;
+    margin: 0 auto;
+    background: var(--pink-dark);
+    color: #fff;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 30px;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 1em;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(232,154,181,0.5);
+    transition: transform 0.15s;
+  }
+  button:active { transform: scale(0.95); }
+  #razon-contador {
+    text-align: center;
+    font-size: 0.8em;
+    color: #a08a80;
+    margin-top: 10px;
+  }
+
+  /* Calendario cápsula */
+  .cal-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .cal-nav button {
+    background: var(--pink);
+    padding: 6px 14px;
+    font-size: 0.85em;
+    box-shadow: none;
+  }
+  #cal-mes-label {
+    font-family: 'Caveat', cursive;
+    font-size: 1.4em;
+    color: var(--ink);
+  }
+  .cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    text-align: center;
+  }
+  .cal-dow { font-size: 0.7em; color: #a08a80; font-weight: 700; padding-bottom: 4px; }
+  .cal-day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-size: 0.85em;
+    background: #fff;
+    color: #ccc;
+  }
+  .cal-day.valid { color: var(--ink); background: #fff8f4; }
+  .cal-day.has-capsula {
+    background: var(--washi2);
+    color: #2b3a55;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .cal-day.has-capsula.locked { background: #e5d9c3; color: #8a7a5c; }
+  .cal-day.has-capsula::after { content: "💗"; font-size: 0.6em; display: block; }
+
+  /* Modal */
+  #modal-overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.55);
+    align-items: center; justify-content: center;
+    padding: 20px;
+    z-index: 10;
+  }
+  #modal-overlay.open { display: flex; }
+  #modal-box {
+    background: var(--cream);
+    border-radius: 12px;
+    padding: 26px 22px;
+    max-width: 360px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  }
+  #modal-box h3 {
+    font-family: 'Caveat', cursive;
+    font-size: 1.7em;
+    color: var(--pink-dark);
+    margin-top: 0;
+  }
+  #modal-box p { font-size: 1em; line-height: 1.5; white-space: pre-wrap; }
+  #modal-box img { max-width: 100%; border-radius: 8px; margin-top: 10px; }
+  #modal-close {
+    margin-top: 16px;
+    background: var(--ink);
+  }
+
+  footer { text-align: center; font-size: 0.75em; color: #7a6a60; margin-top: 10px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="title-card">
+    <h1>Para ti, Yamileth</h1>
+    <p>un rinconcito que crece con el tiempo</p>
+  </div>
+
+  <section id="sec-razones">
+    <h2>Razones por las que te amo</h2>
+    <div id="razon-box">Toca el botón para descubrir una ✨</div>
+    <button id="btn-razon">Descubre una razón 💕</button>
+    <div id="razon-contador">cargando...</div>
+  </section>
+
+  <section id="sec-capsula">
+    <h2>Cápsula del tiempo</h2>
+    <div class="cal-nav">
+      <button id="cal-prev">‹ antes</button>
+      <span id="cal-mes-label"></span>
+      <button id="cal-next">después ›</button>
+    </div>
+    <div class="cal-grid" id="cal-grid"></div>
+    <footer>toca un día marcado 💗 para abrir la carta de ese día</footer>
+  </section>
+
+</div>
+
+<div id="modal-overlay">
+  <div id="modal-box">
+    <h3 id="modal-title">Carta</h3>
+    <p id="modal-text"></p>
+    <img id="modal-img" style="display:none">
+    <button id="modal-close">cerrar</button>
+  </div>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+  import {
+    getFirestore, collection, getDocs
+  } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyC05JhJVgyR9YsH-ciMDEy-XohRuw_ehSQ",
+    authDomain: "my-love-b3e12.firebaseapp.com",
+    projectId: "my-love-b3e12",
+    storageBucket: "my-love-b3e12.firebasestorage.app",
+    messagingSenderId: "587338174796",
+    appId: "1:587338174796:web:bd64ffc9945c733f3b7fe9"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  /* ---------- RAZONES INFINITAS ---------- */
+  let razones = [];
+  let pendientes = [];
+  let mostradas = 0;
+
+  async function cargarRazones() {
+    const snap = await getDocs(collection(db, "razones"));
+    razones = snap.docs.map(d => d.data().texto).filter(Boolean);
+    pendientes = [...razones];
+    document.getElementById("razon-contador").textContent =
+      razones.length ? `0 / ${razones.length} razones descubiertas` : "aún no hay razones guardadas";
+  }
+
+  function mostrarRazon() {
+    if (razones.length === 0) return;
+    if (pendientes.length === 0) pendientes = [...razones]; // se reinicia el ciclo
+    const idx = Math.floor(Math.random() * pendientes.length);
+    const texto = pendientes.splice(idx, 1)[0];
+    document.getElementById("razon-box").textContent = texto;
+    mostradas = Math.min(mostradas + 1, razones.length);
+    document.getElementById("razon-contador").textContent =
+      `${mostradas} / ${razones.length} razones descubiertas`;
+  }
+
+  document.getElementById("btn-razon").addEventListener("click", mostrarRazon);
+
+  /* ---------- CÁPSULA DEL TIEMPO ---------- */
+  let capsulas = {}; // "YYYY-MM-DD" -> {mensaje, imagenUrl}
+  let mesActual = new Date();
+  mesActual.setDate(1);
+
+  async function cargarCapsulas() {
+    const snap = await getDocs(collection(db, "capsulas"));
+    capsulas = {};
+    snap.docs.forEach(d => {
+      const data = d.data();
+      if (data.fecha) capsulas[data.fecha] = data;
+    });
+    renderCalendario();
+  }
+
+  const meses = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+  const dows = ["D","L","M","M","J","V","S"];
+
+  function fechaISO(y,m,d) {
+    return `${y}-${String(m+1).padStart(2,"0")}-${String(d).padStart(2,"0")}`;
+  }
+
+  function renderCalendario() {
+    const y = mesActual.getFullYear();
+    const m = mesActual.getMonth();
+    document.getElementById("cal-mes-label").textContent = `${meses[m]} ${y}`;
+
+    const grid = document.getElementById("cal-grid");
+    grid.innerHTML = "";
+    dows.forEach(d => {
+      const el = document.createElement("div");
+      el.className = "cal-dow";
+      el.textContent = d;
+      grid.appendChild(el);
+    });
+
+    const primerDia = new Date(y, m, 1).getDay();
+    const diasEnMes = new Date(y, m + 1, 0).getDate();
+    const hoy = new Date();
+    const hoyStr = fechaISO(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
+
+    for (let i = 0; i < primerDia; i++) {
+      grid.appendChild(document.createElement("div"));
+    }
+
+    for (let d = 1; d <= diasEnMes; d++) {
+      const iso = fechaISO(y, m, d);
+      const el = document.createElement("div");
+      el.className = "cal-day valid";
+      el.textContent = d;
+
+      if (capsulas[iso]) {
+        const abierta = iso <= hoyStr;
+        el.classList.add("has-capsula");
+        if (!abierta) el.classList.add("locked");
+        el.addEventListener("click", () => abrirCapsula(iso, abierta));
+      }
+      grid.appendChild(el);
+    }
+  }
+
+  function abrirCapsula(iso, abierta) {
+    const overlay = document.getElementById("modal-overlay");
+    const title = document.getElementById("modal-title");
+    const text = document.getElementById("modal-text");
+    const img = document.getElementById("modal-img");
+
+    if (!abierta) {
+      title.textContent = "Aún no 🔒";
+      const dias = Math.ceil((new Date(iso) - new Date()) / 86400000);
+      text.textContent = `Esta carta se abre el ${iso}. Faltan ${dias} día(s).`;
+      img.style.display = "none";
+    } else {
+      const data = capsulas[iso];
+      title.textContent = iso;
+      text.textContent = data.mensaje || "";
+      if (data.imagenUrl) {
+        img.src = data.imagenUrl;
+        img.style.display = "block";
+      } else {
+        img.style.display = "none";
+      }
+    }
+    overlay.classList.add("open");
+  }
+
+  document.getElementById("modal-close").addEventListener("click", () => {
+    document.getElementById("modal-overlay").classList.remove("open");
+  });
+
+  document.getElementById("cal-prev").addEventListener("click", () => {
+    mesActual.setMonth(mesActual.getMonth() - 1);
+    renderCalendario();
+  });
+  document.getElementById("cal-next").addEventListener("click", () => {
+    mesActual.setMonth(mesActual.getMonth() + 1);
+    renderCalendario();
+  });
+
+  cargarRazones();
+  cargarCapsulas();
+</script>
+</body>
+</html>
