@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Un ramo amarillo para ti 💛</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,600&family=Dancing+Script:wght@600;700&family=Quicksand:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --plum:#4B2E63;
+    --plum-soft:#7C5A96;
+    --lilac-top:#EEE8FB;
+    --lilac-bottom:#F9EAF2;
+    --sun:#FFD23F;
+    --sun-deep:#E9A400;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0}
+  body{
+    min-height:100dvh;
+    background:linear-gradient(180deg,var(--lilac-top) 0%,#F3E8F8 55%,var(--lilac-bottom) 100%);
+    color:var(--plum);
+    font-family:'Quicksand',system-ui,-apple-system,'Segoe UI',sans-serif;
+    display:flex;flex-direction:column;align-items:center;
+    padding:calc(env(safe-area-inset-top,0px) + 22px) 16px calc(env(safe-area-inset-bottom,0px) + 150px);
+    overflow-x:hidden;
+  }
+  main{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;width:100%}
+  h1{
+    font-family:'Dancing Script','Brush Script MT',cursive;
+    font-weight:700;font-size:clamp(2.4rem,9vw,3.6rem);
+    margin:0;line-height:1.05;text-align:center;color:var(--plum);
+  }
+  .sub{margin:6px 0 0;font-size:1rem;color:var(--plum-soft);text-align:center}
+  .hint{
+    margin:14px 0 0;font-size:.95rem;font-weight:600;color:var(--plum);
+    background:rgba(255,255,255,.7);border:2px solid var(--sun);
+    padding:6px 16px;border-radius:999px;text-align:center;
+  }
+  .count{margin:8px 0 0;font-size:.85rem;color:var(--plum-soft);text-align:center;min-height:1.2em}
+
+  #bouquet{
+    display:block;margin-top:6px;
+    height:min(64dvh,580px);aspect-ratio:400/580;width:auto;max-width:100%;
+    overflow:visible;
+  }
+
+  .sway{transform-origin:0 0;animation:sway 4.8s ease-in-out infinite}
+  @keyframes sway{0%,100%{transform:rotate(-2.4deg)}50%{transform:rotate(2.4deg)}}
+
+  .tulip{cursor:pointer;outline:none}
+  .tulip:focus-visible .hit{stroke:var(--plum);stroke-width:3;stroke-dasharray:6 5}
+  .pop{transform-origin:0 0}
+  .pop.go{animation:pop .7s ease}
+  @keyframes pop{
+    0%{transform:scale(1) rotate(0)}
+    30%{transform:scale(1.32) rotate(-9deg)}
+    60%{transform:scale(.94) rotate(6deg)}
+    100%{transform:scale(1) rotate(0)}
+  }
+
+  .msg{
+    position:fixed;z-index:5;left:50%;
+    bottom:calc(env(safe-area-inset-bottom,0px) + 16px);
+    width:min(92vw,470px);
+    transform:translate(-50%,24px);opacity:0;pointer-events:none;
+    background:rgba(255,255,255,.96);
+    border:2.5px solid var(--sun);border-radius:26px;
+    padding:18px 24px 20px;text-align:center;
+    box-shadow:0 10px 30px rgba(75,46,99,.18);
+    cursor:pointer;
+  }
+  .msg.show{opacity:1;pointer-events:auto;animation:rise .45s cubic-bezier(.2,.9,.3,1.2) forwards}
+  @keyframes rise{from{opacity:0;transform:translate(-50%,24px)}to{opacity:1;transform:translate(-50%,0)}}
+  .msg .flower{display:block;font-size:1.3rem;line-height:1;margin-bottom:6px}
+  .msg p{
+    margin:0;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-weight:600;
+    font-size:clamp(1.3rem,5vw,1.6rem);line-height:1.3;color:var(--plum);
+  }
+
+  .heart{
+    position:fixed;z-index:6;pointer-events:none;font-size:1.3rem;
+    animation:floatUp 1.5s ease-out forwards;
+  }
+  @keyframes floatUp{
+    0%{opacity:1;transform:translate(0,0) scale(.6)}
+    100%{opacity:0;transform:translate(var(--dx),-110px) scale(1.2)}
+  }
+
+  .petal{
+    position:fixed;z-index:0;top:-24px;width:11px;height:15px;
+    background:var(--sun);border-radius:100% 0 100% 0;opacity:.75;pointer-events:none;
+    animation:fall linear infinite;
+  }
+  @keyframes fall{
+    0%{transform:translate(0,-24px) rotate(0)}
+    100%{transform:translate(var(--dx),110dvh) rotate(540deg)}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    .sway,.petal{animation:none}
+    .petal{display:none}
+    .pop.go{animation:none}
+    .msg.show{animation:none;transform:translate(-50%,0)}
+    .heart{animation-duration:.01s}
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>Para ti, amorcito</h1>
+  <p class="sub">Un ramo de flores amarillas, solo para ti, cariño 💛</p>
+  <p class="hint">Toca un tulipán amarillo 🌷</p>
+  <p class="count" id="count" aria-live="polite"><span id="found">0</span> de <span id="total">0</span> frases encontradas</p>
+
+  <svg id="bouquet" viewBox="0 0 400 580" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ramo de tulipanes, girasoles y rosas amarillas">
+    <defs>
+      <linearGradient id="tulipFront" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#FFE766"/><stop offset="1" stop-color="#F7B500"/>
+      </linearGradient>
+      <linearGradient id="tulipSide" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#F7C51A"/><stop offset="1" stop-color="#E3A000"/>
+      </linearGradient>
+      <radialGradient id="seed">
+        <stop offset="0" stop-color="#9A6431"/><stop offset="1" stop-color="#4B2A10"/>
+      </radialGradient>
+      <radialGradient id="glow">
+        <stop offset="0" stop-color="#FFFFFF" stop-opacity=".9"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+
+    <circle cx="200" cy="240" r="200" fill="url(#glow)"/>
+    <ellipse cx="200" cy="568" rx="70" ry="8" fill="#4B2E63" opacity=".12"/>
+
+    <g id="leaves"></g>
+    <g id="stems" fill="none" stroke-linecap="round"></g>
+    <g id="fillers"></g>
+    <g id="flowers"></g>
+
+    <!-- Papel del ramo -->
+    <g id="wrapper">
+      <path d="M 88 368 Q 200 424 312 368 L 226 556 Q 200 566 174 556 Z" fill="#FBEFC9" stroke="#E2C87A" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M 200 405 L 312 368 L 226 556 Q 200 566 200 566 Z" fill="#F4DFA0" opacity=".75"/>
+      <path d="M 200 410 L 200 562 M 142 392 L 186 556 M 258 392 L 214 556" fill="none" stroke="#E2C87A" stroke-width="1.2" opacity=".8"/>
+      <!-- Listón -->
+      <path d="M 133 462 Q 200 484 267 462 L 262 481 Q 200 503 138 481 Z" fill="#E59F0A"/>
+      <path d="M 200 488 C 158 452 146 505 190 497 Z" fill="#F2B22A" stroke="#C98500" stroke-width="1"/>
+      <path d="M 200 488 C 242 452 254 505 210 497 Z" fill="#F2B22A" stroke="#C98500" stroke-width="1"/>
+      <path d="M 196 496 L 176 528 L 192 522 L 198 534 Z" fill="#E59F0A"/>
+      <path d="M 204 496 L 224 528 L 208 522 L 202 534 Z" fill="#E59F0A"/>
+      <circle cx="200" cy="493" r="7" fill="#E59F0A" stroke="#C98500" stroke-width="1"/>
+    </g>
+  </svg>
+</main>
+
+<div class="msg" id="msg" role="status" aria-live="polite">
+  <span class="flower">🌷</span>
+  <p id="msgText"></p>
+</div>
+
+<script>
+/* ====== Frases (edítalas a tu gusto) ====== */
+const PHRASES = [
+  "Eres el sol que mis días no sabían que necesitaban, amorcito.",
+  "Desde el 24 de agosto a las 7:15 pm mi vida tiene un antes y un después. Y ese después eres tú, cariño.",
+  "Mi mujer hermosa, contigo hasta lo más simple se vuelve especial.",
+  "Si pudiera elegir mil veces, mil veces te escribiría por TikTok, amor.",
+  "Eres mi girasol, cariño: mi mundo siempre gira hacia ti.",
+  "Cada tulipán que te doy es un \"gracias por existir\", amorcito.",
+  "Tu sonrisa es mi color favorito, mi vida.",
+  "Contigo aprendí que el amor también se siente como un día soleado.",
+  "No sé qué hice para merecerte, cariño, pero pienso cuidarte todos los días.",
+  "Eres hermosa por fuera, pero lo que más amo es lo que llevas dentro, amor.",
+  "Me haces querer ser mejor, amorcito, y eso es amor del bueno.",
+  "Si el amor fuera una flor, tú serías todo mi jardín.",
+  "Te amo hoy, te amaré mañana y te seguiré eligiendo siempre, mi cielo.",
+  "Tus abrazos son mi lugar favorito en el mundo, cariño.",
+  "Gracias por dejarme entrar en tu vida, amorcito. Prometo hacerte muy feliz.",
+  "Amorcito, si me preguntan qué es la felicidad, pienso en ti.",
+  "Cariño, contigo siempre es primavera.",
+  "Mi vida, eres el mejor regalo que me pudo dar el destino.",
+  "Amor, me encanta cómo eres, tal cual eres.",
+  "Te quiero más que ayer, pero menos que mañana, amorcito."
+];
+const FINAL_TEXT = "¡Las encontraste todas! Pero mi amor por ti no tiene final 💛";
+
+/* ====== Dibujo de flores ====== */
+function sunflower(){
+  let s = '';
+  for(let i=0;i<18;i++) s += `<ellipse cx="0" cy="-46" rx="9" ry="22" fill="#F2A900" transform="rotate(${i*20+10})"/>`;
+  for(let i=0;i<18;i++) s += `<ellipse cx="0" cy="-44" rx="9" ry="22" fill="#FFD23F" transform="rotate(${i*20})"/>`;
+  s += `<circle r="28" fill="url(#seed)" stroke="#3A1F0B" stroke-width="1.5"/>`;
+  for(let i=1;i<=70;i++){
+    const r = 3.05*Math.sqrt(i), a = i*137.508*Math.PI/180;
+    s += `<circle cx="${(Math.cos(a)*r).toFixed(1)}" cy="${(Math.sin(a)*r).toFixed(1)}" r="1.7" fill="#2E1808" opacity=".75"/>`;
+  }
+  return s;
+}
+
+function rose(){
+  let s = '';
+  for(let i=0;i<6;i++){
+    const a = i*60*Math.PI/180;
+    s += `<circle cx="${(Math.sin(a)*17).toFixed(1)}" cy="${(-Math.cos(a)*17).toFixed(1)}" r="14" fill="#F7D14A" stroke="#D9A20A" stroke-width="1.6"/>`;
+  }
+  s += `<circle r="19" fill="#F9D84F" stroke="#D9A20A" stroke-width="1.6"/>`;
+  s += `<circle r="12.5" fill="#FBDD62" stroke="#D9A20A" stroke-width="1.4"/>`;
+  s += `<path d="M -6 2 C -8 -8 6 -10 8 -2 C 9 5 -2 8 -4 1 C -5 -3 2 -5 3 -1" fill="none" stroke="#C48F00" stroke-width="1.6" stroke-linecap="round"/>`;
+  return s;
+}
+
+function tulipShape(){
+  return `
+    <path d="M -22 -46 Q 0 -24 22 -46 Q 30 -6 0 28 Q -30 -6 -22 -46 Z" fill="#E0A100"/>
+    <path d="M 0 32 C -32 28 -37 -12 -31 -52 C -17 -42 -6 -24 0 -2 Z" fill="url(#tulipSide)"/>
+    <path d="M 0 32 C 32 28 37 -12 31 -52 C 17 -42 6 -24 0 -2 Z" fill="url(#tulipSide)"/>
+    <path d="M 0 33 C -21 24 -23 -14 0 -62 C 23 -14 21 24 0 33 Z" fill="url(#tulipFront)" stroke="#D69A00" stroke-width="1.2"/>
+    <path d="M 0 26 C -8 8 -8 -14 0 -44" fill="none" stroke="#FFF3A8" stroke-width="2.2" stroke-linecap="round" opacity=".7"/>
+    <circle class="hit" r="44" fill="#ffffff" fill-opacity="0"/>`;
+}
+
+/* tipo, x, y, rotación, escala */
+const HEADS = [
+  // girasoles
+  ['sun',  200, 172,   0, 1.02],
+  ['sun',  118, 232, -12, 0.80],
+  ['sun',  282, 232,  12, 0.80],
+  ['sun',   78, 190, -15, 0.62],
+  ['sun',  322, 190,  15, 0.62],
+  // rosas amarillas
+  ['rose', 152, 312,  -8, 0.95],
+  ['rose', 248, 312,   8, 0.95],
+  ['rose', 200, 278,   0, 0.90],
+  ['rose',  95, 290, -14, 0.80],
+  ['rose', 305, 290,  14, 0.80],
+  ['rose', 128, 348,  -6, 0.78],
+  ['rose', 272, 348,   6, 0.78],
+  ['rose', 200, 338,   0, 0.85],
+  // tulipanes (los que se pueden tocar)
+  ['tulip',200,  60,   0, 0.85],
+  ['tulip',145,  85, -12, 0.80],
+  ['tulip',255,  85,  12, 0.80],
+  ['tulip', 96, 132, -18, 0.85],
+  ['tulip',304, 132,  18, 0.85],
+  ['tulip', 38, 215, -40, 0.75],
+  ['tulip',362, 215,  40, 0.75],
+  ['tulip', 50, 300, -32, 0.85],
+  ['tulip',350, 300,  32, 0.85]
+];
+const LEAVES = [
+  [140,392,-155,1.1],[260,392,-25,1.1],[165,388,-125,.9],
+  [235,388,-55,.9],[112,385,-170,.9],[288,385,-10,.9]
+];
+
+const leavesG  = document.getElementById('leaves');
+const stemsG   = document.getElementById('stems');
+const flowersG = document.getElementById('flowers');
+
+LEAVES.forEach(([x,y,r,s])=>{
+  leavesG.insertAdjacentHTML('beforeend',
+    `<g transform="translate(${x} ${y}) rotate(${r}) scale(${s})">
+       <path d="M0 0 C 12 -18 44 -18 64 0 C 44 18 12 18 0 0 Z" fill="#3E9B48" stroke="#2C7A36" stroke-width="1"/>
+       <path d="M4 0 L 56 0" stroke="#2C7A36" stroke-width="1.2" fill="none"/>
+     </g>`);
+});
+
+/* florecitas blancas de relleno */
+const FILLERS = [[30,150],[370,150],[75,60],[325,60],[20,255],[380,255],[112,38],[288,38],[178,18],[222,18],[15,335],[385,335]];
+const fillersG = document.getElementById('fillers');
+FILLERS.forEach(([x,y])=>{
+  const tx = 200 + (x-200)*0.12, ty = 392;
+  fillersG.insertAdjacentHTML('beforeend',
+    `<path d="M ${x} ${y} Q ${x+(tx-x)*0.1} ${y+(ty-y)*0.6} ${tx} ${ty}" stroke="#5DAF5D" stroke-width="1.6" fill="none" stroke-linecap="round"/>`);
+  let b = '';
+  [[0,0],[-6,5],[6,5],[-3,-6],[4,-5]].forEach(([dx,dy])=>{
+    b += `<circle cx="${x+dx}" cy="${y+dy}" r="3.6" fill="#FFF9E3" stroke="#F1D98A" stroke-width=".8"/>`;
+  });
+  b += `<circle cx="${x}" cy="${y}" r="1.6" fill="#F2B705"/>`;
+  fillersG.insertAdjacentHTML('beforeend', b);
+});
+
+HEADS.forEach(([type,x,y,rot,scale],i)=>{
+  const tx = 200 + (x-200)*0.1, ty = 392;
+  const cx = x + (tx-x)*0.1,   cy = y + (ty-y)*0.6;
+  const w = type==='sun' ? 6 : type==='tulip' ? 4.5 : 3.5;
+  const col = type==='tulip' ? '#4AA34A' : '#3D8B3D';
+  stemsG.insertAdjacentHTML('beforeend',
+    `<path d="M ${x} ${y} Q ${cx} ${cy} ${tx} ${ty}" stroke="${col}" stroke-width="${w}"/>`);
+
+  const delay = (-Math.random()*4.8).toFixed(2);
+  let inner;
+  if(type==='sun')  inner = `<g class="pop">${sunflower()}</g>`;
+  if(type==='rose') inner = `<g class="pop">${rose()}</g>`;
+  if(type==='tulip')inner = `<g class="tulip" role="button" tabindex="0" aria-label="Tulipán amarillo: toca para leer una frase de amor"><g class="pop">${tulipShape()}</g></g>`;
+
+  flowersG.insertAdjacentHTML('beforeend',
+    `<g transform="translate(${x} ${y}) rotate(${rot}) scale(${scale})">
+       <g class="sway" style="animation-delay:${delay}s">${inner}</g>
+     </g>`);
+});
+
+/* ====== Interacción ====== */
+const msg = document.getElementById('msg');
+const msgText = document.getElementById('msgText');
+const foundEl = document.getElementById('found');
+const countEl = document.getElementById('count');
+document.getElementById('total').textContent = PHRASES.length;
+
+let queue = [];
+const seen = new Set();
+
+function shuffle(a){
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+function nextIndex(){
+  if(!queue.length) queue = shuffle([...PHRASES.keys()]);
+  return queue.pop();
+}
+
+function showPhrase(text){
+  msg.classList.remove('show');
+  void msg.offsetWidth;
+  msgText.textContent = text;
+  msg.classList.add('show');
+}
+
+function spawnHearts(x,y){
+  for(let i=0;i<5;i++){
+    const h = document.createElement('span');
+    h.className = 'heart';
+    h.textContent = i%2 ? '💛' : '🌼';
+    h.style.left = (x + (Math.random()*40-20)) + 'px';
+    h.style.top  = (y + (Math.random()*20-10)) + 'px';
+    h.style.setProperty('--dx', (Math.random()*80-40) + 'px');
+    h.style.animationDelay = (i*0.08) + 's';
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(), 1800);
+  }
+}
+
+function activate(tulip, x, y){
+  const pop = tulip.querySelector('.pop');
+  pop.classList.remove('go');
+  void pop.getBoundingClientRect();
+  pop.classList.add('go');
+
+  const idx = nextIndex();
+  showPhrase(PHRASES[idx]);
+  spawnHearts(x,y);
+
+  if(!seen.has(idx)){
+    seen.add(idx);
+    if(seen.size === PHRASES.length){
+      countEl.textContent = FINAL_TEXT;
+    } else {
+      foundEl.textContent = seen.size;
+    }
+  }
+}
+
+const svg = document.getElementById('bouquet');
+svg.addEventListener('click', e=>{
+  const t = e.target.closest('.tulip');
+  if(t) activate(t, e.clientX, e.clientY);
+});
+svg.addEventListener('keydown', e=>{
+  if((e.key==='Enter' || e.key===' ') && e.target.classList && e.target.classList.contains('tulip')){
+    e.preventDefault();
+    const r = e.target.getBoundingClientRect();
+    activate(e.target, r.left + r.width/2, r.top + r.height/2);
+  }
+});
+msg.addEventListener('click', ()=> msg.classList.remove('show'));
+
+/* ====== Pétalos cayendo ====== */
+for(let i=0;i<16;i++){
+  const p = document.createElement('i');
+  p.className = 'petal';
+  p.style.left = (Math.random()*100) + 'vw';
+  p.style.animationDuration = (9 + Math.random()*8) + 's';
+  p.style.animationDelay = (-Math.random()*14) + 's';
+  p.style.setProperty('--dx', (Math.random()*120-60) + 'px');
+  document.body.appendChild(p);
+}
+</script>
+</body>
+</html>
