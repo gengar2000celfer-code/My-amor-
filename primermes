@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nuestro primer mes 💕</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#ffe3ec;--bg2:#e6dcff;--card:rgba(255,255,255,.74);--ink:#5a3a45;--accent:#e8588a;--acc2:#a86bff;--tape:#f7c6d4;--soft:#fbd3e0;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#2a1524;--bg2:#1a1430;--card:rgba(62,36,54,.78);--ink:#f8e3ea;--accent:#ff8fb1;--acc2:#c39bff;--tape:#6a3a4b;--soft:#5a3248}}
+:root[data-theme="dark"]{--bg:#2a1524;--bg2:#1a1430;--card:rgba(62,36,54,.78);--ink:#f8e3ea;--accent:#ff8fb1;--acc2:#c39bff;--tape:#6a3a4b;--soft:#5a3248}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:linear-gradient(160deg,var(--bg),var(--bg2)) fixed;color:var(--ink);font-family:'Quicksand',system-ui,sans-serif;text-align:center;overflow-x:hidden}
+main{max-width:580px;margin:0 auto;padding:20px 18px 70px;position:relative;z-index:1}
+h1{font-family:'Caveat',cursive;font-size:3.6rem;line-height:1;margin:.1em 0;background:linear-gradient(90deg,var(--accent),var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{font-family:'Caveat',cursive;font-size:1.6rem;margin:0 0 8px;min-height:1.6em}
+.hero{padding:30px 0 10px}
+.big{width:92px;height:92px;animation:beat 1.3s infinite;cursor:pointer;user-select:none;display:inline-block;filter:drop-shadow(0 8px 14px rgba(232,88,138,.45))}
+@keyframes beat{0%,100%{transform:scale(1)}14%{transform:scale(1.18)}28%{transform:scale(1)}42%{transform:scale(1.12)}}
+.count{font-family:'Caveat',cursive;font-size:1.6rem;min-height:1.6em}
+.card{position:relative;background:var(--card);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.45);padding:30px 20px 22px;margin:36px 0;border-radius:22px;box-shadow:0 12px 30px rgba(120,40,80,.16);--r:-1deg}
+.card:nth-of-type(even){--r:1.2deg}
+.card:before{content:"";position:absolute;top:-12px;left:50%;width:100px;height:26px;background:var(--tape);opacity:.9;transform:translateX(-50%) rotate(-3deg);border-radius:3px}
+.rv{opacity:0;transform:translateY(46px) rotate(var(--r,0deg));transition:opacity .8s,transform .8s}
+.rv.in{opacity:1;transform:rotate(var(--r,0deg))}
+.card h2{font-family:'Caveat',cursive;font-size:2.1rem;margin:0 0 10px;color:var(--accent)}
+.card p{margin:0 0 6px;line-height:1.6}
+button{font-family:'Caveat',cursive;font-size:1.5rem;background:linear-gradient(135deg,var(--accent),var(--acc2));color:#fff;border:0;border-radius:30px;padding:9px 28px;cursor:pointer;margin-top:12px;box-shadow:0 6px 14px rgba(232,88,138,.35);transition:transform .15s}
+button:active{transform:scale(.94)}
+button.alt{background:var(--soft);color:var(--ink);box-shadow:none}
+input[type=date],input[type=text]{font-family:inherit;font-size:1rem;padding:8px 12px;border-radius:14px;border:2px solid var(--soft);background:var(--card);color:var(--ink);max-width:100%}
+#reason{font-family:'Caveat',cursive;font-size:1.8rem;min-height:3.6em;display:flex;align-items:center;justify-content:center;transition:opacity .3s}
+.letter{text-align:left;font-family:'Caveat',cursive;font-size:1.5rem;line-height:1.35;cursor:pointer;min-height:3em}
+.fly{position:fixed;pointer-events:none;width:28px;height:28px;animation:up 1.5s forwards;z-index:60}
+@keyframes up{to{transform:translateY(-170px) scale(1.5) rotate(20deg);opacity:0}}
+.petal{position:fixed;top:-30px;z-index:0;pointer-events:none;animation:fall linear forwards;opacity:.85}
+@keyframes fall{to{transform:translate(40px,110vh) rotate(420deg)}}
+.timer{display:flex;gap:8px;justify-content:center;margin-top:14px}
+.timer div{background:linear-gradient(160deg,var(--soft),var(--card));border-radius:16px;padding:10px 6px;min-width:64px}
+.timer b{display:block;font-size:1.6rem;color:var(--accent)}
+.timer span{font-size:.72rem;letter-spacing:.05em}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.tile{background:var(--soft);border-radius:18px;padding:14px 8px;min-height:96px;cursor:pointer;font-family:'Caveat',cursive;font-size:1.35rem;display:flex;align-items:center;justify-content:center;transition:transform .25s,background .25s;border:2px dashed var(--accent)}
+.tile:active{transform:scale(.95)}
+.tile.open{background:linear-gradient(135deg,var(--accent),var(--acc2));color:#fff;font-size:1.2rem;border-style:solid;border-color:transparent;transform:rotate(-1.5deg)}
+.tl{text-align:left;border-left:3px dashed var(--accent);margin:14px 0 0 14px;padding-left:20px}
+.tl div{margin:0 0 18px;position:relative;opacity:0;transform:translateX(-14px);transition:.6s}
+.in .tl div{opacity:1;transform:none}
+.in .tl div:nth-child(2){transition-delay:.2s}.in .tl div:nth-child(3){transition-delay:.4s}.in .tl div:nth-child(4){transition-delay:.6s}.in .tl div:nth-child(5){transition-delay:.8s}
+.tl div:before{content:"";position:absolute;left:-30px;top:2px;width:16px;height:16px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23e8588a' d='M12 21.5s-8-4.9-10.2-9.8C.2 8 2.3 3.8 6.5 3.8c2.1 0 3.9 1.2 5.5 3.2 1.6-2 3.4-3.2 5.5-3.2 4.2 0 6.3 4.2 4.7 7.9C20 16.6 12 21.5 12 21.5z'/%3E%3C/svg%3E") center/contain no-repeat}
+.tl b{font-family:'Caveat',cursive;font-size:1.5rem;color:var(--accent);display:block}
+.promise{display:flex;gap:10px;text-align:left;padding:9px 6px;cursor:pointer;font-size:1.05rem;border-radius:12px}
+.promise.done{text-decoration:line-through;opacity:.6}
+.bar{height:10px;background:var(--soft);border-radius:10px;overflow:hidden;margin-top:10px}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--acc2));transition:width .5s}
+.ringw{position:relative;width:150px;height:150px;margin:6px auto}
+.ringw svg{position:absolute;inset:0}
+.ringw div{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'Caveat',cursive;font-size:2.2rem;color:var(--accent);line-height:1}
+.ringw small{font-size:1rem;color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:10px}
+.chip{padding:8px 14px;border-radius:30px;background:var(--soft);cursor:pointer;font-weight:600;transition:.25s}
+.chip.on{background:linear-gradient(135deg,var(--accent),var(--acc2));color:#fff;transform:scale(1.08)}
+.wish{display:flex;justify-content:space-between;text-align:left;padding:8px 4px;border-bottom:1px dashed var(--soft)}
+.polaroid{background:#fff;padding:10px 10px 26px;border-radius:4px;box-shadow:0 8px 16px rgba(0,0,0,.2);transform:rotate(-2.5deg);cursor:pointer;color:#5a3a45;transition:transform .3s}
+.polaroid:nth-child(even){transform:rotate(2.5deg)}.polaroid:active{transform:scale(1.05)}
+.polaroid .ph{background:var(--tape);height:110px;display:flex;align-items:center;justify-content:center;font-size:2.2rem;background-size:cover;background-position:center}
+.polaroid small{font-family:'Caveat',cursive;font-size:1.25rem;display:block;margin-top:6px}
+#yesno{min-height:150px}
+#intro{position:fixed;inset:0;z-index:100;background:linear-gradient(160deg,var(--bg),var(--bg2));display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 1s,transform 1s;padding:20px}
+#intro.gone{opacity:0;transform:scale(1.3);pointer-events:none}
+#intro .env{width:120px;height:120px;animation:beat 1.6s infinite}
+#intro p{font-family:'Caveat',cursive;font-size:2rem;margin:6px 0}
+#mus{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:70;width:48px;height:48px;border-radius:50%;padding:0;font-size:1.3rem;margin:0}
+#nxt{position:fixed;right:70px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:70;width:48px;height:48px;border-radius:50%;padding:0;font-size:1.2rem;margin:0}
+#toast{position:fixed;left:50%;bottom:calc(76px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:70;background:var(--card);backdrop-filter:blur(10px);padding:8px 18px;border-radius:20px;font-family:'Caveat',cursive;font-size:1.4rem;opacity:0;transition:opacity .4s;pointer-events:none;white-space:nowrap}
+.promise svg{width:20px;height:20px;flex:none;margin-top:2px}.wt svg{width:16px;height:16px;vertical-align:-2px}.ph svg{width:46px;height:46px}#mus svg,#nxt svg{display:block;margin:auto;width:22px;height:22px}.big svg,#intro .env svg,.fly svg,.petal svg{width:100%;height:100%;display:block}
+.hm{position:relative;width:190px;height:190px;margin:4px auto}.hs{width:100%;height:100%;display:block;filter:drop-shadow(0 8px 14px rgba(232,88,138,.3))}#lvt{position:absolute;left:0;right:0;top:37%;font-family:'Caveat',cursive;font-size:2.8rem;line-height:1;color:var(--ink);text-shadow:0 1px 6px rgba(0,0,0,.25);transition:color .4s}.sk{animation:sk .5s}@keyframes sk{20%{transform:translateX(-8px) rotate(-4deg)}50%{transform:translateX(8px) rotate(4deg)}80%{transform:translateX(-4px)}}.eq{font-family:'Caveat',cursive;font-size:1.9rem;color:var(--accent);opacity:0;transition:opacity 1s;display:flex;align-items:center;justify-content:center;gap:8px;min-height:44px}.eq svg{width:66px;height:33px}.w1{animation:wv 2.4s linear infinite}.w2{animation:wv 3.6s linear infinite reverse}@keyframes wv{to{transform:translateX(-12px)}}
+.eq{font-size:1.7rem;line-height:1.15;padding:0 6px;margin-top:6px}.pp{animation:pp .35s}@keyframes pp{50%{transform:scale(1.2)}}
+.chip{position:relative;display:inline-flex;align-items:center}.chip .t{transition:filter .5s}.chip:not(.on) .t{filter:blur(6px)}.chip .ov{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}.chip.on .ov{display:none}.chip .hv{display:none;margin-right:6px}.chip.on .hv{display:inline-flex}.chip svg{width:16px;height:16px}.chip.on .hv svg{animation:beat 1.3s infinite}
+footer{font-family:'Caveat',cursive;font-size:1.8rem;margin-top:36px}
+</style>
+</head>
+<body>
+<div id="intro">
+  <div class="env"><svg viewBox="0 0 120 100"><rect x="6" y="20" width="108" height="72" rx="10" fill="#fff4f8" stroke="#f3a6c2" stroke-width="3"/><path d="M8 24l52 38 52-38" fill="#ffd0e0" stroke="#f3a6c2" stroke-width="3" stroke-linejoin="round"/><g transform="translate(46 46) scale(1.17)"><path d="M12 21.5s-8-4.9-10.2-9.8C.2 8 2.3 3.8 6.5 3.8c2.1 0 3.9 1.2 5.5 3.2 1.6-2 3.4-3.2 5.5-3.2 4.2 0 6.3 4.2 4.7 7.9C20 16.6 12 21.5 12 21.5z" fill="#e8588a"/></g></svg></div>
+  <p>Tengo algo para ti, mi amor...</p>
+  <button id="open">Abrir</button>
+</div>
+<button id="mus" aria-label="Música"><svg viewBox="0 0 24 24"><path d="M9 18V6l10-2v12" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="7" cy="18" r="3" fill="#fff"/><circle cx="17" cy="16" r="3" fill="#fff"/></svg></button>
+<button id="nxt" aria-label="Cambiar canción"><svg viewBox="0 0 24 24"><path d="M5 5l9 7-9 7z" fill="#fff"/><path d="M17 5v14" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg></button><div id="toast"></div>
+<main>
+  <div class="hero">
+    <div class="big" id="heart" aria-label="Toca el corazón"><svg viewBox="0 0 24 24"><defs><linearGradient id="hg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff7aa8"/><stop offset="1" stop-color="#d9367a"/></linearGradient></defs><path d="M12 21.5s-8-4.9-10.2-9.8C.2 8 2.3 3.8 6.5 3.8c2.1 0 3.9 1.2 5.5 3.2 1.6-2 3.4-3.2 5.5-3.2 4.2 0 6.3 4.2 4.7 7.9C20 16.6 12 21.5 12 21.5z" fill="url(#hg)"/><path d="M6.4 6.4c1.1-.6 2.4-.2 3 .9" stroke="#fff" stroke-opacity=".7" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></div>
+    <h1>¡Un mes juntos!</h1>
+    <p class="sub" id="sub"></p>
+    <div class="count" id="count">Toca el corazón</div>
+  </div>
+
+  <section class="card rv">
+    <h2>Lo que este mes me enseñó</h2>
+    <p>Que la mejor decisión fue no dejarte ir. Cada día a tu lado se siente como un regalo, y hoy quiero celebrar que me eligiste y que yo te elijo a ti, siempre.</p>
+  </section>
+
+  <section class="card rv">
+    <h2>Tiempo juntos</h2>
+    <p>Juntos desde el 3 de septiembre de 2026</p>
+    <input type="hidden" id="since" value="2026-09-03">
+    <div class="timer" id="timer"></div>
+  </section>
+
+  <section class="card rv">
+    <h2>Medidor de amor</h2>
+    <div class="hm" id="hm">
+      <svg viewBox="0 0 24 24" class="hs"><defs><clipPath id="hc"><path d="M12 21.5s-8-4.9-10.2-9.8C.2 8 2.3 3.8 6.5 3.8c2.1 0 3.9 1.2 5.5 3.2 1.6-2 3.4-3.2 5.5-3.2 4.2 0 6.3 4.2 4.7 7.9C20 16.6 12 21.5 12 21.5z"/></clipPath><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff8fb1"/><stop offset="1" stop-color="#e03a78"/></linearGradient></defs><path d="M12 21.5s-8-4.9-10.2-9.8C.2 8 2.3 3.8 6.5 3.8c2.1 0 3.9 1.2 5.5 3.2 1.6-2 3.4-3.2 5.5-3.2 4.2 0 6.3 4.2 4.7 7.9C20 16.6 12 21.5 12 21.5z" fill="var(--soft)"/><g clip-path="url(#hc)"><g id="lq" style="transform:translateY(23px);transition:transform 1s cubic-bezier(.3,1.5,.5,1)"><path class="w2" d="M-12 0q3-1.4 6 0t6 0t6 0t6 0t6 0t6 0t6 0t6 0t6 0V30H-12z" fill="#ff8fb1" fill-opacity=".5"/><path class="w1" d="M-12 0q3-1.4 6 0t6 0t6 0t6 0t6 0t6 0t6 0t6 0t6 0V30H-12z" fill="url(#lg)"/></g></g><path d="M12 21.5s-8-4.9-10.2-9.8C.2 8 2.3 3.8 6.5 3.8c2.1 0 3.9 1.2 5.5 3.2 1.6-2 3.4-3.2 5.5-3.2 4.2 0 6.3 4.2 4.7 7.9C20 16.6 12 21.5 12 21.5z" fill="none" stroke="var(--accent)" stroke-width=".5"/></svg>
+      <div id="lvt"><span id="lv">0</span>%</div>
+    </div>
+    <p id="lvmsg">Presiona para saber cuánto te amo</p>
+    <div class="eq" id="eq">Cada vez que presionas aumenta más, porque mi amor por ti se multiplica cada segundo que pasa</div>
+    <button id="love">Presiona</button>
+  </section>
+
+  <section class="card rv">
+    <h2>Razones por las que te amo</h2>
+    <div id="reason">Toca el botón</div>
+    <button id="btn">Otra razón</button>
+  </section>
+
+  <section class="card rv">
+    <h2>Cosas que amo de ti</h2>
+    <p>Toca cada una para descubrirla</p>
+    <div class="chips" id="chips"></div>
+  </section>
+
+  <section class="card rv">
+    <h2>Nuestro mes en momentos</h2>
+    <div class="tl">
+      <div><b>El día que nos conocimos</b>Un mensaje que cambió todo.</div>
+      <div><b>Las charlas eternas</b>Donde el tiempo desaparecía contigo.</div>
+      <div><b>Cuando fuimos novios</b>El mejor "sí" de mi vida.</div>
+      <div><b>Nuestra primera cita</b>Nervios, risas y las ganas de que no terminara nunca.</div>
+      <div><b>Hoy</b>Un mes y mil razones más para quererte.</div>
+    </div>
+  </section>
+
+  <section class="card rv">
+    <h2>Nuestros recuerdos</h2>
+    <p>Toca un recuadro para poner una foto nuestra</p>
+    <div class="grid" id="photos"></div>
+    <input type="file" accept="image/*" id="file" hidden>
+  </section>
+
+  <section class="card rv">
+    <h2>Cupones de amor</h2>
+    <p>Toca cada uno para canjearlo</p>
+    <div class="grid" id="coupons"></div>
+  </section>
+
+  <section class="card rv">
+    <h2>Ábrelo cuando...</h2>
+    <div class="grid" id="env"></div>
+  </section>
+
+  <section class="card rv">
+    <h2>Promesas para el mes 2</h2>
+    <div id="promises"></div>
+    <div class="bar"><i id="pbar"></i></div>
+  </section>
+
+  <section class="card rv">
+    <h2>Deseos para nosotros</h2>
+    <p>Escribe un deseo para el mes 2</p>
+    <input type="text" id="wi" placeholder="Ej: un viaje juntos" maxlength="60">
+    <button id="wb">Agregar</button>
+    <div id="wl" style="margin-top:10px"></div>
+  </section>
+
+  <section class="card rv">
+    <h2>Una cartita para ti</h2>
+    <div class="letter" id="letter">Toca aquí para abrir</div>
+  </section>
+
+  <section class="card rv">
+    <h2>¿Seguimos otro mes juntos?</h2>
+    <div id="yesno">
+      <button id="yes">Sí</button>
+      <button class="alt" id="no">No</button>
+      <div id="ans" style="font-family:'Caveat',cursive;font-size:1.9rem;margin-top:14px"></div>
+    </div>
+  </section>
+
+  <footer>Feliz primer mes, mi mujer hermosa 💕<br>Te amo hoy, mañana y siempre.</footer>
+</main>
+<script>
+var $=function(i){return document.getElementById(i)};
+var FB={save:function(){},photo:function(){}};
+var PK=['#ff6f9f','#ff9ec0','#e8588a','#ffb3cd','#c58bff'];
+var ART={
+heart:function(c){return '<svg viewBox="0 0 24 24"><path d="M12 21.5s-8-4.9-10.2-9.8C.2 8 2.3 3.8 6.5 3.8c2.1 0 3.9 1.2 5.5 3.2 1.6-2 3.4-3.2 5.5-3.2 4.2 0 6.3 4.2 4.7 7.9C20 16.6 12 21.5 12 21.5z" fill="'+c+'"/><path d="M6.4 6.4c1.1-.6 2.4-.2 3 .9" stroke="#fff" stroke-opacity=".7" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg>'},
+petal:function(c){return '<svg viewBox="0 0 24 24"><path d="M12 2C19 6.5 20 14 12 22 4 14 5 6.5 12 2z" fill="'+c+'"/><path d="M12 6v13" stroke="#fff" stroke-opacity=".5" stroke-width=".9" stroke-linecap="round"/></svg>'},
+flower:function(c){var s='<svg viewBox="0 0 24 24">';for(var k=0;k<5;k++)s+='<ellipse cx="12" cy="6.6" rx="3.7" ry="5.4" fill="'+c+'" transform="rotate('+k*72+' 12 12)"/>';return s+'<circle cx="12" cy="12" r="2.3" fill="#ffe08a"/></svg>'},
+spark:function(c){return '<svg viewBox="0 0 24 24"><path d="M12 1c.8 7 4 10.2 11 11-7 .8-10.2 4-11 11-.8-7-4-10.2-11-11 7-.8 10.2-4 11-11z" fill="'+c+'"/></svg>'},
+conf:function(c){return '<svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="18" rx="2" fill="'+c+'"/></svg>'}};
+function art(k){k=k||['heart','petal','flower','heart','spark'][Math.floor(Math.random()*5)];return ART[k](k=='spark'?'#ffd27a':PK[Math.floor(Math.random()*5)])}
+var IC={note:'<svg viewBox="0 0 24 24"><path d="M9 18V6l10-2v12" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="7" cy="18" r="3" fill="#fff"/><circle cx="17" cy="16" r="3" fill="#fff"/></svg>',
+snd:'<svg viewBox="0 0 24 24"><path d="M4 9h4l5-4v14l-5-4H4z" fill="#fff"/><path d="M16 9c1.5 1.5 1.5 4.5 0 6M18.5 6.5c3 3 3 8 0 11" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/></svg>',
+hf:ART.heart('#e8588a'),
+ho:'<svg viewBox="0 0 24 24"><path d="M12 21.5s-8-4.9-10.2-9.8C.2 8 2.3 3.8 6.5 3.8c2.1 0 3.9 1.2 5.5 3.2 1.6-2 3.4-3.2 5.5-3.2 4.2 0 6.3 4.2 4.7 7.9C20 16.6 12 21.5 12 21.5z" fill="none" stroke="#e8588a" stroke-width="2" stroke-linejoin="round"/></svg>',
+star:'<svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z" fill="#ffb84d"/></svg>'};
+var CAM='<svg viewBox="0 0 24 24"><path d="M4 7h3l1.6-2.4h6.8L17 7h3a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2z" fill="#e8588a" fill-opacity=".85"/><circle cx="12" cy="13.5" r="3.9" fill="#fff"/><circle cx="12" cy="13.5" r="2.2" fill="#e8588a"/></svg>';
+function fly(x,y,k){var s=document.createElement('span');s.className='fly';s.innerHTML=art(k);s.style.left=x+'px';s.style.top=y+'px';document.body.appendChild(s);setTimeout(function(){s.remove()},1500)}
+function boom(){var K=['heart','petal','flower','spark','conf'];for(var k=0;k<28;k++)fly(Math.random()*innerWidth,innerHeight*.5+Math.random()*innerHeight*.4,K[k%5])}
+function store(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v);FB.save()}catch(e){return null}}
+function tw(el,t,sp,cb){var a=Array.from(t),k=0;el.textContent='';(function f(){if(k<=a.length){el.textContent=a.slice(0,k++).join('');setTimeout(f,sp||45)}else if(cb)cb()})()}
+/* música */
+var ac,tm,trk=0,names=['Canon en Re','Cajita musical','Lofi suave'],ms=[380,520,600];
+var CA=[[146.83,293.66,369.99,440],[110,277.18,329.63,440],[123.47,293.66,369.99,493.88],[92.5,277.18,369.99,440],[98,293.66,392,493.88],[146.83,293.66,369.99,440],[98,293.66,392,493.88],[110,277.18,329.63,440]];
+var LO=[[130.81,196,246.94,329.63],[110,164.81,196,261.63],[87.31,130.81,164.81,220],[98,146.83,164.81,246.94]];
+var BX=[523.25,659.25,783.99,659.25,587.33,698.46,880,698.46,523.25,659.25,783.99,1046.5,880,783.99,659.25,587.33];
+function tone(f,ty,v,d){var t=ac.currentTime,o=ac.createOscillator(),g=ac.createGain();o.type=ty;o.frequency.value=f;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(v,t+.03);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g);g.connect(ac.destination);o.start();o.stop(t+d+.1)}
+var TR=[function(j){var c=CA[Math.floor(j/8)%8],p=[0,1,2,3,2,3,2,1][j%8];tone(c[p],'sine',p?.06:.09,p?1.4:2.2)},
+function(j){tone(BX[j%16],'triangle',.07,1.3)},
+function(j){var c=LO[Math.floor(j/8)%4],s=j%8;if(!s)c.forEach(function(f){tone(f,'sine',.035,4.5)});else if(s%2==0)tone(c[(s/2)%4]*2,'triangle',.04,1.6)}];
+function music(on){try{clearInterval(tm);if(on){ac=ac||new(window.AudioContext||window.webkitAudioContext)();ac.resume();var j=0;tm=setInterval(function(){TR[trk](j++)},ms[trk])}$('mus').innerHTML=on?IC.snd:IC.note;$('mus').dataset.on=on?1:''}catch(e){}}
+$('mus').onclick=function(){music(!this.dataset.on)};
+$('nxt').onclick=function(){trk=(trk+1)%3;music(true);var t=$('toast');t.textContent=names[trk];t.style.opacity=1;clearTimeout(t.h);t.h=setTimeout(function(){t.style.opacity=0},2200)};
+/* intro */
+$('open').onclick=function(){$('intro').classList.add('gone');music(true);boom();tw($('sub'),'Y siento que apenas empieza lo mejor, amorcito 🌷',50)};
+/* pétalos */
+setInterval(function(){var p=document.createElement('span'),w=14+Math.random()*14;p.className='petal';p.innerHTML=art(['petal','petal','flower','heart'][Math.floor(Math.random()*4)]);p.style.width=p.style.height=w+'px';p.style.left=Math.random()*100+'vw';p.style.animationDuration=(7+Math.random()*6)+'s';document.body.appendChild(p);setTimeout(function(){p.remove()},14000)},800);
+/* aparecer al hacer scroll */
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.15});
+document.querySelectorAll('.rv').forEach(function(e){io.observe(e)});
+/* corazón */
+var n=0;$('heart').onclick=function(ev){n++;$('count').textContent=n+(n===1?' beso mandado':' besos mandados');for(var k=0;k<4;k++)fly(ev.clientX+(k-2)*18,ev.clientY,['heart','flower','petal','spark'][k])};
+/* tiempo juntos */
+function tick(){var v=$('since').value;if(!v){$('timer').innerHTML='';return}var ms=Math.max(0,Date.now()-new Date(v+'T00:00:00')),a=[[Math.floor(ms/864e5),'días'],[Math.floor(ms/36e5)%24,'horas'],[Math.floor(ms/6e4)%60,'min'],[Math.floor(ms/1e3)%60,'seg']];
+$('timer').innerHTML=a.map(function(x){return '<div><b>'+x[0]+'</b><span>'+x[1]+'</span></div>'}).join('')}
+setInterval(tick,1000);tick();
+/* medidor */
+var v=0,over=0,PH=['Ya no cabe en el corazón, pero mi amor sigue creciendo','Y aunque dejes de presionar, sigue subiendo: nunca se detiene','No existe un número que alcance para medir lo que siento por ti','Hoy te amo más que ayer, y mañana te amaré más que hoy'];
+function fmt(n){if(n<1e9)return Math.floor(n).toLocaleString('es-MX');var e=Math.floor(Math.log10(n));return (n/Math.pow(10,e)).toFixed(1)+'×10<sup>'+e+'</sup>'}
+function render(pop){var t=$('lvt'),n=Math.min(v,1e300);$('lv').innerHTML=fmt(n);t.style.fontSize=(n<1e4?2.8:n<1e6?2.2:n<1e9?1.7:1.9)+'rem';t.style.color=v>45?'#fff':'';$('lq').style.transform='translateY('+(23-19.2*Math.min(v,90)/100)+'px)';if(pop){t.classList.remove('pp');void t.offsetWidth;t.classList.add('pp')}}
+function shake(){var w=$('hm');w.classList.remove('sk');void w.offsetWidth;w.classList.add('sk')}
+$('love').onclick=function(ev){var k;
+if(v<90){v=Math.min(90,v+9+Math.floor(Math.random()*7));$('lvmsg').textContent=v>=90?PH[0]:v<30?'Apenas empiezo a contarte cuánto...':v<60?'Esto sigue creciendo...':'Casi, casi, pero aún hay más...';
+if(v>=90){$('love').textContent='Presiona otra vez';shake();$('eq').style.opacity=1;setInterval(function(){v=Math.min(Math.ceil(v*1.04)+1,1e300);render()},1000)}}
+else{over++;v=Math.min(Math.ceil(v*2.5)+7,1e300);$('lvmsg').textContent=PH[1+(over-1)%3];shake();if(over%5==0)boom()}
+render(1);for(k=0;k<3;k++)fly(ev.clientX+(k-1)*20,ev.clientY,k?'heart':'spark')};
+/* razones */
+var reasons=["Porque tu sonrisa me arregla hasta el peor día.","Porque contigo todo se siente fácil y bonito.","Porque eres hermosa por fuera y más por dentro.","Porque me haces querer ser mejor cada día.","Porque tu risa es mi sonido favorito.","Porque contigo hasta lo simple es especial.","Porque me elegiste, y eso lo cambió todo.","Porque eres mi lugar seguro, cariño.","La razón más importante: porque eres tú, ya que yo solo te amaré a ti y solo a ti hasta la eternidad."],i=-1;
+$('btn').onclick=function(ev){if(i>=reasons.length-1)return;i++;var r=$('reason');r.style.opacity=0;setTimeout(function(){r.textContent=reasons[i];r.style.opacity=1;var L=i==reasons.length-1;r.style.color=L?'var(--accent)':'';if(L){boom();var b=$('btn');b.disabled=true;b.textContent='Para siempre';b.style.opacity='.6';b.style.cursor='default'}},200);fly(ev.clientX,ev.clientY)};
+/* chips */
+["Tu sonrisa","Tu risa","Tu mirada","Tu voz","Tu forma de ser","Tu cariño","Tus abrazos","Tu paciencia","Tu ternura"].forEach(function(t){var c=document.createElement('div');c.className='chip';c.innerHTML='<span class="ov">'+IC.ho+'</span><span class="hv">'+ART.heart('#fff')+'</span><span class="t"></span>';c.lastChild.textContent=t;c.onclick=function(e){if(c.classList.contains('on'))return;c.classList.add('on');fly(e.clientX,e.clientY,'heart');FB.save()};$('chips').appendChild(c)});
+/* fotos */
+var cur;for(var p=0;p<4;p++)(function(p){var d=document.createElement('div');d.className='polaroid';d.innerHTML='<div class="ph">'+CAM+'</div><small>Recuerdo '+(p+1)+'</small>';d.onclick=function(){cur=d;$('file').click()};$('photos').appendChild(d)})(p);
+function setPhoto(k,u){var ph=$('photos').children[k].querySelector('.ph');ph.textContent='';ph.style.backgroundImage='url('+u+')'}
+$('file').onchange=function(){var f=this.files[0],c=cur;this.value='';if(!f||!c)return;var k=[].indexOf.call($('photos').children,c),im=new Image();im.onload=function(){var r=Math.min(1,700/Math.max(im.width,im.height)),cv=document.createElement('canvas');cv.width=im.width*r;cv.height=im.height*r;cv.getContext('2d').drawImage(im,0,0,cv.width,cv.height);var u=cv.toDataURL('image/jpeg',.7);setPhoto(k,u);FB.photo(k,u)};im.src=URL.createObjectURL(f)};
+/* tarjetas */
+function tiles(id,list){list.forEach(function(t){var d=document.createElement('div');d.className='tile';d.textContent=t[0];d.set=function(o){d.classList.toggle('open',o);d.textContent=o?t[1]:t[0]};d.onclick=function(e){var o=d.classList.toggle('open');d.textContent=o?t[1]:t[0];if(o)fly(e.clientX,e.clientY,'heart');FB.save()};$(id).appendChild(d)})}
+tiles('coupons',[["Cena a tu antojo","Una cena donde tú eliges"],["Abrazo infinito","Abrazo sin tiempo límite"],["Noche de películas","Tú eliges, yo te abrazo"],["Mimos de 10 min","Cariñitos sin quejas"]]);
+tiles('env',[["Estés triste","Respira. Eres fuerte, hermosa y estoy contigo siempre"],["Me extrañes","Cierra los ojos: ya voy en tus pensamientos"],["No puedas dormir","Sueña conmigo, amor. Aquí estoy"],["Dudes de ti","Eres increíble, nunca lo dudes"]]);
+/* promesas */
+var pl=["Decirte lo mucho que te quiero cada día","Hacerte reír aunque sea con tonterías","Cuidarte y escucharte siempre","Planear una cita especial este mes"];
+function pr(d,o,t){d.innerHTML=(o?IC.hf:IC.ho)+'<span>'+t+'</span>'}
+pl.forEach(function(t){var d=document.createElement('div');d.className='promise';pr(d,0,t);d.set=function(o){d.classList.toggle('done',o);pr(d,o,t)};d.onclick=function(e){var o=d.classList.toggle('done');pr(d,o,t);if(o)fly(e.clientX,e.clientY,'heart');var c=document.querySelectorAll('.promise.done').length;$('pbar').style.width=c/pl.length*100+'%';if(c==pl.length)boom();FB.save()};$('promises').appendChild(d)});
+/* deseos */
+var ws=[];try{ws=JSON.parse(store('wishes')||'[]')}catch(e){}
+function rw(){$('wl').innerHTML='';ws.forEach(function(w,k){var d=document.createElement('div');d.className='wish';d.innerHTML='<span class="wt"></span><span style="cursor:pointer;padding:0 6px">×</span>';d.firstChild.innerHTML=IC.star;d.firstChild.appendChild(document.createTextNode(' '+w));d.lastChild.onclick=function(){ws.splice(k,1);store('wishes',JSON.stringify(ws));rw()};$('wl').appendChild(d)})}
+$('wb').onclick=function(){var v=$('wi').value.trim();if(!v)return;ws.push(v);store('wishes',JSON.stringify(ws));$('wi').value='';rw()};rw();
+/* carta */
+var lt=false;$('letter').onclick=function(){if(lt)return;lt=true;tw(this,"Mi amor: un mes no parece mucho, pero para mí ya es mi parte favorita de la vida. Gracias por tu paciencia, tu cariño y por dejarme quererte. Prometo seguir luchando por nosotros todos los días. Con todo mi corazón, tu novio 💗",35)};
+/* sí / no */
+$('yes').onclick=function(){$('ans').textContent='¡Sabía que dirías que sí! Te amo 💕';boom()};
+var no=$('no'),esc=0;function run(e){if(e&&e.preventDefault)e.preventDefault();esc++;no.style.position='relative';no.style.left=(Math.random()*120-60)+'px';no.style.top=(Math.random()*70-10)+'px';if(esc>3)no.textContent='¿Segura?'}
+no.addEventListener('mouseover',run);no.addEventListener('touchstart',run);no.addEventListener('click',run);
+
+/* sincronización con Firebase */
+function getState(){var q=function(sel,cl){var r=[];document.querySelectorAll(sel).forEach(function(e,k){if(e.classList.contains(cl))r.push(k)});return r};return{coupons:q('#coupons .tile','open'),env:q('#env .tile','open'),promises:q('.promise','done'),chips:q('.chip','on'),wishes:ws}}
+function applyState(st){function ap(sel,arr,fn){document.querySelectorAll(sel).forEach(function(e,k){fn(e,(arr||[]).indexOf(k)>-1)})}
+ap('#coupons .tile',st.coupons,function(e,o){e.set(o)});ap('#env .tile',st.env,function(e,o){e.set(o)});ap('.promise',st.promises,function(e,o){e.set(o)});ap('.chip',st.chips,function(e,o){if(o)e.classList.add('on')});
+$('pbar').style.width=document.querySelectorAll('.promise.done').length/pl.length*100+'%';ws=st.wishes||[];rw()}
+</script>
+
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {getFirestore,doc,setDoc,onSnapshot} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+/* Configuración de Firebase */
+var cfg={apiKey:"AIzaSyC05JhJVgyR9YsH-ciMDEy-XohRuw_ehSQ",authDomain:"my-love-b3e12.firebaseapp.com",projectId:"my-love-b3e12",storageBucket:"my-love-b3e12.firebasestorage.app",messagingSenderId:"587338174796",appId:"1:587338174796:web:bd64ffc9945c733f3b7fe9"};
+if(cfg.apiKey!=="TU_API_KEY"){
+var db=getFirestore(initializeApp(cfg)),sd=doc(db,"amor","estado");
+FB.save=function(){clearTimeout(FB.t);FB.t=setTimeout(function(){setDoc(sd,getState()).catch(console.error)},400)};
+FB.photo=function(k,u){setDoc(doc(db,"amor","foto"+k),{d:u}).catch(console.error)};
+onSnapshot(sd,function(x){if(x.exists())applyState(x.data())});
+for(var k=0;k<4;k++)(function(k){onSnapshot(doc(db,"amor","foto"+k),function(x){if(x.exists())setPhoto(k,x.data().d)})})(k);
+}
+</script>
+</body>
+</html>
