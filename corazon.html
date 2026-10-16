@@ -31,6 +31,30 @@
 <script>
 // ====== PERSONALIZA AQUÍ ======
 const NOMBRE = "Para ti, mi amor";
+const FRASES = [
+  "Eres lo más hermoso que me ha pasado.",
+  "Contigo cada día se siente como un buen código: perfecto.",
+  "Amorcito, te amo más de lo que cualquier programa podría contar.",
+  "Si el amor fuera un loop, yo querría que nunca terminara.",
+  "Eres mi lugar favorito en todo el universo.",
+  "Cariño, gracias por existir y por quedarte conmigo.",
+  "Cada latido de este corazón lleva tu nombre."
+];
+// ===============================
+
+document.getElementById('nombre').textContent = NOMBRE;
+const cv = document.getElementById('c'), ctx = cv.getContext('2d');
+let W, H, DPR;
+function resize(){
+  DPR = Math.min(window.devicePixelRatio || 1, 2);
+  W = cv.width = innerWidth * DPR; H = cv.height = innerHeight * DPR;
+}
+addEventListener('resize', resize); resize();
+
+// Forma del corazón (curva paramétrica)
+function heart(u){
+  return [
+    1.6 * Math.pow(Math.sin(u), 3),
     1.3*Math.cos(u) - 0.5*Math.cos(2*u) - 0.2*Math.cos(3*u) - 0.1*Math.cos(4*u)
   ];
 }
