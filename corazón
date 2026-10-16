@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Para ti 💖</title>
+<style>
+  :root { --bg:#050002; --rojo:#ff2a44; --texto:#ffe3e8; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html, body { height:100%; background:var(--bg); overflow:hidden; font-family:Georgia,'Times New Roman',serif; color:var(--texto); }
+  body { background:radial-gradient(circle at 50% 45%, #2a0510 0%, var(--bg) 70%); }
+  canvas { position:fixed; inset:0; width:100%; height:100%; touch-action:none; }
+  .titulo { position:fixed; top:calc(env(safe-area-inset-top,0px) + 6vh); left:0; right:0; text-align:center; padding:0 20px; pointer-events:none; }
+  .titulo h1 { font-size:clamp(1.8rem,7vw,3.2rem); font-weight:normal; letter-spacing:2px; text-shadow:0 0 18px var(--rojo); }
+  .titulo p { margin-top:8px; font-size:clamp(.9rem,3.5vw,1.2rem); opacity:.75; font-style:italic; }
+  .frase { position:fixed; bottom:calc(env(safe-area-inset-bottom,0px) + 14vh); left:0; right:0; text-align:center; padding:0 28px; font-size:clamp(1.1rem,4.5vw,1.6rem); min-height:3.5em; text-shadow:0 0 12px rgba(255,42,68,.7); transition:opacity .6s; pointer-events:none; }
+  .frase.oculta { opacity:0; }
+  button { position:fixed; bottom:calc(env(safe-area-inset-bottom,0px) + 5vh); left:50%; transform:translateX(-50%); background:transparent; color:var(--texto); border:1px solid var(--rojo); border-radius:30px; padding:12px 26px; font:inherit; font-size:1rem; cursor:pointer; box-shadow:0 0 14px rgba(255,42,68,.45); }
+  button:active { background:rgba(255,42,68,.25); }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div class="titulo">
+  <h1 id="nombre"></h1>
+  <p>Cada partícula de este corazón eres tú</p>
+</div>
+<div class="frase" id="frase"></div>
+<button id="btn">Otra frase 💌</button>
+
+<script>
+// ====== PERSONALIZA AQUÍ ======
+const NOMBRE = "Para ti, mi amor";
+    1.3*Math.cos(u) - 0.5*Math.cos(2*u) - 0.2*Math.cos(3*u) - 0.1*Math.cos(4*u)
+  ];
+}
+const N = 2600, pts = [];
+for (let i = 0; i < N; i++){
+  const u = Math.random() * Math.PI * 2;
+  const [hx, hy] = heart(u);
+  const rad = Math.sqrt(Math.random());
+  pts.push({
+    x: hx*rad, y: hy*rad,
+    z: 1.1 * (1 - rad) * (Math.random()*2 - 1),
+    tw: Math.random() * Math.PI * 2,
+    sz: .6 + Math.random() * 1.3
+  });
+}
+// Color según profundidad (de rojo oscuro a rojo brillante)
+function col(f, a){
+  f = Math.max(0, Math.min(1, f));
+  const r = 70 + (255-70)*f, g = 0 + 30*f, b = 10 + 40*f;
+  return `rgba(${r|0},${g|0},${b|0},${a})`;
+}
+
+let ang = 0, vel = 0.008, drag = false, lastX = 0, boost = 0;
+cv.addEventListener('pointerdown', e => { drag = true; lastX = e.clientX; });
+addEventListener('pointerup', () => drag = false);
+addEventListener('pointermove', e => { if (drag){ ang += (e.clientX - lastX) * 0.01; lastX = e.clientX; } });
+
+function draw(t){
+  t /= 1000;
+  ctx.clearRect(0, 0, W, H);
+  if (!drag) ang += vel;
+  boost *= 0.94;
+  const beat = 1 + 0.05*Math.pow(Math.max(0, Math.sin(t*3.2)), 3) + boost;
+  const s = Math.min(W, H) * 0.27 * beat;
+  const cx = W/2, cy = H*0.47;
+  const ca = Math.cos(ang), sa = Math.sin(ang);
+  for (const p of pts){
+    const rx = p.x*ca + p.z*sa;
+    const rz = -p.x*sa + p.z*ca;
+    const f = 3 / (3 + rz);
+    const px = cx + rx*s*f, py = cy - p.y*s*f;
+    const tw = 0.65 + 0.35*Math.sin(t*2 + p.tw);
+    const bright = (rz + 1.3) / 2.6;
+    ctx.fillStyle = col(bright, tw);
+    ctx.beginPath();
+    ctx.arc(px, py, p.sz * f * DPR * 1.3, 0, 6.2832);
+    ctx.fill();
+  }
+  requestAnimationFrame(draw);
+}
+requestAnimationFrame(draw);
+
+// Frases
+const fEl = document.getElementById('frase');
+let idx = -1;
+function nuevaFrase(){
+  fEl.classList.add('oculta');
+  setTimeout(() => {
+    let n; do { n = Math.floor(Math.random()*FRASES.length); } while (n === idx && FRASES.length > 1);
+    idx = n; fEl.textContent = FRASES[n];
+    fEl.classList.remove('oculta');
+  }, 500);
+  boost = 0.12; // latido fuerte
+}
+document.getElementById('btn').addEventListener('click', nuevaFrase);
+nuevaFrase();
+setInterval(nuevaFrase, 9000);
+</script>
+</body>
+</html>
