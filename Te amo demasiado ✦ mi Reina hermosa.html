@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Te amo demasiado ✦ mi Reina hermosa</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0618;--ink:#fff1f9;--mute:#d9b8d0;--pink:#ff7ac6;--blue:#9fd8ff;--glass:rgba(255,255,255,.07);--line:rgba(255,160,215,.28);color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(120% 80% at 50% 0,#2a0f4a 0,var(--bg) 60%) fixed,var(--bg);color:var(--ink);font:400 17px/1.6 Quicksand,system-ui,sans-serif;overflow-x:hidden}
+#sky{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+main{position:relative;z-index:1}
+section{max-width:560px;margin:0 auto;padding:56px 22px;text-align:center}
+h1{font:400 clamp(52px,16vw,92px)/1 "Great Vibes",cursive;margin:0;color:#fff;text-shadow:0 0 24px var(--pink),0 0 60px rgba(255,122,198,.5)}
+h2{font:400 clamp(34px,10vw,48px)/1.1 "Great Vibes",cursive;margin:0 0 14px;color:var(--pink)}
+.sub{font:400 clamp(26px,8vw,38px)/1.2 "Great Vibes",cursive;color:var(--blue);margin:6px 0 0}
+p{margin:0 0 14px;color:var(--mute)}
+.hero{padding-top:36px;padding-bottom:12px}
+.stage{position:relative;width:100%;max-width:420px;aspect-ratio:1;margin:8px auto;touch-action:pan-y}
+#heart{width:100%;height:100%;display:block;cursor:grab}
+.ctrl{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+button,.btn{font:600 15px Quicksand,sans-serif;color:var(--ink);background:var(--glass);border:1px solid var(--line);border-radius:999px;padding:10px 18px;cursor:pointer;transition:transform .15s,background .2s}
+button:hover,.btn:hover{background:rgba(255,122,198,.22)}
+button:active{transform:scale(.94)}button.on{background:rgba(255,122,198,.35);border-color:var(--pink)}
+button:focus-visible,.btn:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.btn.main{background:linear-gradient(135deg,#ff7ac6,#b07cff);border:0;color:#1a0830}
+input[type=file]{position:absolute;width:1px;height:1px;opacity:0}
+.hint{font-size:14px;opacity:.8;margin-top:10px}.cap{font:700 clamp(22px,6.4vw,29px)/1.35 Quicksand,system-ui,sans-serif;letter-spacing:.2px;color:#fff;min-height:84px;margin:12px 0 0;padding:0 6px;display:flex;align-items:center;justify-content:center;transition:opacity .3s,color .3s;text-shadow:0 0 10px currentColor,0 0 28px currentColor,0 2px 4px rgba(0,0,0,.5)}
+.card{background:var(--glass);border:1px solid var(--line);border-radius:26px;padding:26px 22px;backdrop-filter:blur(8px)}
+.big{font:400 clamp(30px,9vw,42px)/1.25 "Great Vibes",cursive;color:#fff;margin:6px 0 12px}
+.when{font-weight:600;color:var(--blue)}
+.time{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}
+.time div{background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:16px;padding:12px 4px}
+.time b{display:block;font:600 28px Quicksand,sans-serif;color:#fff}
+.time span{font-size:13px;color:var(--mute)}
+.tulips{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin:6px 0 14px}
+.tulips button{font-size:48px;line-height:1;padding:8px 10px;background:none;border:0;animation:bob 3.2s ease-in-out infinite;filter:drop-shadow(0 0 12px rgba(255,122,198,.55))}
+.tulips button:nth-child(2){animation-delay:-.7s}.tulips button:nth-child(3){animation-delay:-1.4s}.tulips button:nth-child(4){animation-delay:-2.1s}.tulips button:nth-child(5){animation-delay:-2.8s}
+@keyframes bob{50%{transform:translateY(-8px) rotate(3deg)}}
+#phrase{min-height:96px;font:400 clamp(26px,7.5vw,34px)/1.3 "Great Vibes",cursive;color:#fff;display:flex;align-items:center;justify-content:center;transition:opacity .35s}
+.count{font:600 64px/1 Quicksand,sans-serif;color:#fff;text-shadow:0 0 24px var(--pink);margin:8px 0}
+.inf{font-size:34px;padding:14px 26px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.chips span{background:var(--glass);border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-size:15px}
+.fl{position:fixed;pointer-events:none;z-index:5;font-size:26px;animation:up 1.6s ease-out forwards}
+@keyframes up{to{transform:translateY(-150px) scale(1.4);opacity:0}}
+.vow{font:400 clamp(26px,7vw,32px)/1.35 "Great Vibes",cursive;color:#fff}
+@media (prefers-reduced-motion:reduce){.tulips button{animation:none}.fl{animation-duration:.01s}}
+.mus{position:fixed;right:14px;top:calc(env(safe-area-inset-top,0px) + 12px);z-index:6;width:48px;height:48px;padding:0;font-size:22px;line-height:1;border-radius:50%;backdrop-filter:blur(8px)}.mus.on{border-color:var(--pink);box-shadow:0 0 18px rgba(255,122,198,.55)}
+.letter{text-align:left;padding:30px 24px}.letter p{color:#ffeaf6;font:500 18px/1.75 Quicksand,system-ui,sans-serif;margin:0 0 18px}.letter .first{font-weight:700;font-size:22px;line-height:1.4;color:#ff8cc8;text-shadow:0 0 16px rgba(255,122,198,.55)}.letter .sig{font-weight:700;font-size:20px;color:#8fd0ff;text-align:center;margin:26px 0 0;text-shadow:0 0 16px rgba(143,208,255,.5)}
+</style>
+</head>
+<body>
+<canvas id="sky" aria-hidden="true"></canvas>
+<button id="mus" class="mus" aria-label="Música" aria-pressed="false">🔇</button>
+<main>
+  <section class="hero">
+    <h1>Te amo demasiado</h1>
+    <p class="sub">mi Reina hermosa</p>
+    <div class="stage"><canvas id="heart" width="840" height="840" aria-label="Corazón de estrellas que gira"></canvas></div>
+    <div class="ctrl"><button id="b0">💗 Corazón</button><button id="b1">💎 Diamante</button><button id="b2">⭐ Estrella</button></div>
+    <p id="cap" class="cap" aria-live="polite">Elige una figura y mira lo que veo en ti ✦</p>
+  </section>
+  <section style="padding-bottom:90px">
+    <div class="card letter">
+      <p class="first">Amor, eres la mejor novia del universo.</p>
+      <p>Los dos tenemos errores, y es justo, porque somos humanos. Sé que a veces te sientes presionada y abrumada, como si nada de lo que haces estuviera bien. Pero no es así.</p>
+      <p>Quizá ninguno de los dos ha tomado siempre las mejores decisiones, y sé que nos hemos fallado el uno al otro. Todavía nos falta madurar en esta relación, y quiero hacerlo contigo, de la mano.</p>
+      <p>Dicen que en todo lo malo hay algo bueno, y en todo lo bueno, algo malo, y está bien. Lo importante es no dejar que nuestros errores se interpongan en lo que más vale: que te amo, que me amas, y que nos amaremos por el resto de la eternidad.</p>
+      <p class="sig">Te amo, mi Reina ✦</p>
+    </div>
+  </section>
+</main>
+
+<script>
+
+(function(){
+var RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+/* ---------- cielo estrellado ---------- */
+var sky=document.getElementById('sky'),sc=sky.getContext('2d'),W,H,st=[],sh=[];
+function rs(){W=sky.width=innerWidth;H=sky.height=innerHeight;
+  st=[];var n=Math.min(260,W*H/4500|0);
+  for(var i=0;i<n;i++){var q=Math.random();st.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.4+.3,p:Math.random()*6.28,s:Math.random()*.03+.008,c:q<.3?'255,122,198':q<.55?'159,216,255':'255,255,255'})}}
+rs();addEventListener('resize',rs);
+function skyLoop(){
+  sc.clearRect(0,0,W,H);
+  st.forEach(function(s){s.p+=s.s;var a=.35+.65*Math.abs(Math.sin(s.p));sc.fillStyle='rgba('+s.c+','+a.toFixed(2)+')';sc.beginPath();sc.arc(s.x,s.y,s.r,0,6.283);sc.fill()});
+  if(!RM&&Math.random()<.012)sh.push({x:Math.random()*W,y:Math.random()*H*.5,l:0});
+  sh=sh.filter(function(o){o.l+=1;var x=o.x+o.l*9,y=o.y+o.l*4.5,g=sc.createLinearGradient(x,y,x-90,y-45);g.addColorStop(0,'rgba(255,255,255,.9)');g.addColorStop(1,'rgba(255,122,198,0)');sc.strokeStyle=g;sc.lineWidth=2;sc.beginPath();sc.moveTo(x,y);sc.lineTo(x-90,y-45);sc.stroke();return o.l<60});
+  requestAnimationFrame(skyLoop)}
+skyLoop();
+
+/* ---------- foto y figuras de estrellas en 3D ---------- */
+var hc=document.getElementById('heart'),hx=hc.getContext('2d'),N=84,P=[],shp=3,shf=3,shk=1,bk=1,ang=0,mode='spin',target=0,drag=false,lx=0,last=0;
+var DM=[[-.55,.9],[.55,.9],[1.15,.35],[0,-1.05],[-1.15,.35]],SP=[];
+for(var k=0;k<10;k++){var rr=k%2?.46:1.1,aa=Math.PI/2+k*Math.PI/5;SP.push([rr*Math.cos(aa),.1+rr*Math.sin(aa)])}
+function inPoly(Q,x,y){var c=false;for(var i=0,j=Q.length-1;i<Q.length;j=i++){var a=Q[i],b=Q[j];if((a[1]>y)!==(b[1]>y)&&x<(b[0]-a[0])*(y-a[1])/(b[1]-a[1])+a[0])c=!c}return c}
+function inside(k,x,y){if(k===0){var a=x*x+y*y-1;return a*a*a-x*x*y*y*y<=0}return inPoly(k===1?DM:SP,x,y)}
+var BB=[[-1.25,1.25,-1.1,1.3],[-1.2,1.2,-1.1,.95],[-1.1,1.1,-1,1.25]];
+function edgeP(k,x,y){var d=.07;return !(inside(k,x+d,y)&&inside(k,x-d,y)&&inside(k,x,y+d)&&inside(k,x,y-d))}
+function samp(k,ed){var b=BB[k];for(var n=0;n<500;n++){var x=b[0]+Math.random()*(b[1]-b[0]),y=b[2]+Math.random()*(b[3]-b[2]);if(inside(k,x,y)&&(!ed||edgeP(k,x,y)))return[x,y]}return[0,0]}
+var FA=[[],[[-.55,.9,.55,.9],[-1.15,.35,1.15,.35],[-.55,.9,-.4,.35],[.55,.9,.4,.35],[-.4,.35,0,-1.05],[.4,.35,0,-1.05],[0,.35,0,-1.05]],[]];
+for(var k2=0;k2<10;k2+=2)FA[2].push([0,.1,SP[k2][0],SP[k2][1]]);
+var COL=[{f:[255,90,168],e:[255,165,212],a:[255,255,255]},{f:[70,160,255],e:[135,208,255],a:[235,248,255]},{f:[255,196,30],e:[255,238,140],a:[255,252,215]}];
+function tint(c,br){return[Math.min(255,c[0]*br|0),Math.min(255,c[1]*br|0),Math.min(255,c[2]*br|0)]}
+
+function build(img){
+  var o=document.createElement('canvas');o.width=o.height=N;var c=o.getContext('2d');
+  if(img){var sq=Math.min(img.width,img.height);c.drawImage(img,(img.width-sq)/2,(img.height-sq)/2,sq,sq,0,0,N,N)}
+  else{var d=c.createImageData(N,N);
+    for(var j=0;j<N;j++)for(var i2=0;i2<N;i2++){var x=(i2/N-.5)*2.4,y=1.2-j/N*2.3,a=x*x+y*y-1,kk=(j*N+i2)*4;
+      if(a*a*a-x*x*y*y*y<=0){d.data[kk]=255;d.data[kk+1]=110+j*1.2;d.data[kk+2]=190+i2*.5;d.data[kk+3]=255}}
+    c.putImageData(d,0,0)}
+  var px=c.getImageData(0,0,N,N).data,n=0;P=[];
+  for(var j2=0;j2<N;j2++)for(var i3=0;i3<N;i3++){var k3=(j2*N+i3)*4;if(px[k3+3]<40)continue;
+    var T=[];
+    for(var sI=0;sI<3;sI++){
+      var ty=(n%100<24&&FA[sI].length)?'a':(Math.random()<.4?'e':'f'),x2,y2;
+      if(ty==='a'){var g=FA[sI][Math.random()*FA[sI].length|0],u=Math.random();x2=g[0]+(g[2]-g[0])*u+(Math.random()-.5)*.025;y2=g[1]+(g[3]-g[1])*u+(Math.random()-.5)*.025}
+      else{var q=samp(sI,ty==='e');x2=q[0];y2=q[1]}
+      var c2=tint(COL[sI][ty],.85+Math.random()*.3);
+      T.push([x2,y2,(Math.random()*2-1)*(ty==='f'?.2:.12),c2[0],c2[1],c2[2]])}
+    T.push([(i3/N-.5)*2.4+(Math.random()-.5)*.02,1.2-j2/N*2.3,(Math.random()-.5)*.03,px[k3],px[k3+1],px[k3+2]]);
+    P.push({T:T,sx:(Math.random()-.5)*6,sy:(Math.random()-.5)*6,sz:(Math.random()-.5)*6,f:Math.random()*6.28});n++}
+  bk=RM?1:0}
+build(null);
+
+function draw(t){
+  var S=hc.width,cx=S/2,cy=S/2*1.02,sc2=S*.2;
+  hx.clearRect(0,0,S,S);hx.globalCompositeOperation='lighter';
+  if(bk<1)bk=Math.min(1,bk+.012);
+  var e=1-Math.pow(1-bk,3);if(shk<1)shk=Math.min(1,shk+.03);var zE=1-Math.pow(1-shk,3);
+  if(mode==='spin'&&!drag)ang+=.007;
+  else if(mode!=='spin'&&!drag)ang+=(target-ang)*.08;
+  var au=ang+(mode==='hold'&&!drag?.3*Math.sin(t/1300):0),ca=Math.cos(au),sa=Math.sin(au);
+  for(var i=0;i<P.length;i++){var p=P[i],A=p.T[shf],B=p.T[shp],
+    x=(A[0]+(B[0]-A[0])*zE)*e+p.sx*(1-e),y=(A[1]+(B[1]-A[1])*zE)*e+p.sy*(1-e),z=(A[2]+(B[2]-A[2])*zE)*e+p.sz*(1-e),
+    r=A[3]+(B[3]-A[3])*zE|0,g=A[4]+(B[4]-A[4])*zE|0,b=A[5]+(B[5]-A[5])*zE|0;
+    var xr=x*ca+z*sa,zr=-x*sa+z*ca,f=3.6/(3.6+zr),
+        a=(.72+.2*Math.sin(t/500+p.f))*(.65+.35*f);
+    hx.fillStyle='rgba('+r+','+g+','+b+','+a.toFixed(2)+')';
+    var s=(2.4+(r+g+b)/765*1.4)*f;
+    hx.fillRect(cx+xr*f*sc2-s/2,cy-y*f*sc2-s/2,s,s)}
+  hx.globalCompositeOperation='source-over';
+  requestAnimationFrame(draw)}
+requestAnimationFrame(draw);
+
+function setMode(m,a){mode=m;if(a!==undefined){target=Math.round((ang-a)/6.2832)*6.2832+a}}
+function setShape(n){if(n!==shp){shf=shp;shp=n;shk=0}}
+var CAP=["Este es el amor que te tengo: inmenso, amorcito.","Así de hermosa eres: única, perfecta, valiosa.","Eres la estrella más hermosa y brillante de todo el cielo.","Tú, mi Reina hermosa."],capE=document.getElementById('cap');
+function showCap(i){[0,1,2].forEach(function(n){document.getElementById('b'+n).classList.toggle('on',n===i)});capE.style.opacity=0;setTimeout(function(){capE.textContent=CAP[i];capE.style.color=['#ff8cc8','#8fd0ff','#ffd84a','#ffffff'][i];capE.style.opacity=1},220)}
+function pick(n){last=n;setShape(n);setMode('hold',0);showCap(n)}
+[0,1,2].forEach(function(n){document.getElementById('b'+n).onclick=function(){pick(n)}});
+function tapShape(){pick(shp===3?0:(shp+1)%3)}
+
+var dx0=0,dt0=0;hc.addEventListener('pointerdown',function(e){dx0=e.clientX;dt0=Date.now();drag=true;lx=e.clientX;hc.setPointerCapture(e.pointerId)});
+hc.addEventListener('pointermove',function(e){if(drag){ang+=(e.clientX-lx)*.012;lx=e.clientX}});
+hc.addEventListener('pointerup',function(e){drag=false;if(Math.abs(e.clientX-dx0)<8&&Date.now()-dt0<400){tapShape();return}if(mode!=='spin')target=ang});
+
+
+/* ---------- melodía de fondo (sintetizada, sin archivos) ---------- */
+var AC=null,mst=null,playing=false,nextT=0,stp=0,tmr=null,autoDone=false,mb=document.getElementById('mus');
+var CD={C:[48,55,60,64],Am:[45,52,57,60],F:[41,48,53,57],Dm:[50,57,60,65],G:[43,50,55,59]},
+    PR=['C','Am','F','C','Dm','F','G','C'],
+    MEL=[[79,0,0,76,0,72],[76,0,0,72,0,69],[72,0,0,77,0,76],[76,0,0,74,0,72],[74,0,0,77,0,74],[77,0,0,76,0,72],[74,0,0,71,0,74],[72,0,0,0,0,0]],
+    AR=[1,2,3,2,3,2],EI=.42;
+function note(m,t,dur,vol,type,att){var o=AC.createOscillator(),g=AC.createGain();o.type=type;o.frequency.value=440*Math.pow(2,(m-69)/12);
+  g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(vol,t+(att||.012));g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+  o.connect(g);g.connect(mst);o.start(t);o.stop(t+dur+.05)}
+function sched(){while(nextT<AC.currentTime+.4){var b=Math.floor(stp/6)%8,k=stp%6,c=CD[PR[b]];
+  if(k===0)c.forEach(function(m){note(m,nextT,2.7,.03,'sine',.6)});
+  if(k===0||k===3)note(c[0],nextT,1.8,.08,'sine');
+  note(c[AR[k]]+12,nextT,1.1,.035,'sine');
+  var mm=MEL[b][k];if(mm){note(mm,nextT,2.2,.1,'triangle');note(mm+12,nextT,.9,.02,'sine')}
+  nextT+=EI;stp++}}
+function start(){var C=window.AudioContext||window.webkitAudioContext;if(!C)return;
+  if(!AC){AC=new C();var dry=AC.createGain(),wet=AC.createGain(),cv=AC.createConvolver(),len=AC.sampleRate*2.6,buf=AC.createBuffer(2,len,AC.sampleRate);
+    for(var ch=0;ch<2;ch++){var d=buf.getChannelData(ch);for(var i=0;i<len;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/len,2.4)}
+    cv.buffer=buf;mst=AC.createGain();mst.gain.value=.8;dry.gain.value=.7;wet.gain.value=.5;
+    mst.connect(dry);mst.connect(cv);cv.connect(wet);dry.connect(AC.destination);wet.connect(AC.destination)}
+  if(AC.resume)AC.resume();
+  if(!playing){playing=true;nextT=AC.currentTime+.1;stp=0;sched();tmr=setInterval(sched,120)}
+  mb.classList.add('on');mb.textContent='🎵';mb.setAttribute('aria-pressed','true')}
+function stop(){playing=false;clearInterval(tmr);if(AC&&AC.suspend)AC.suspend();mb.classList.remove('on');mb.textContent='🔇';mb.setAttribute('aria-pressed','false')}
+mb.onclick=function(){autoDone=true;playing?stop():(AC&&AC.state==='suspended'&&(playing=true,AC.resume(),nextT=AC.currentTime+.1,tmr=setInterval(sched,120),mb.classList.add('on'),mb.textContent='🎵',mb.setAttribute('aria-pressed','true'),1)||start())};
+document.addEventListener('click',function f(e){if(autoDone)return;autoDone=true;document.removeEventListener('click',f);if(!(e.target.closest&&e.target.closest('#mus')))start()});
+document.addEventListener('visibilitychange',function(){if(!AC||!playing)return;if(document.hidden)AC.suspend();else AC.resume()});
+
+})();
+</script>
+</body>
+</html>
